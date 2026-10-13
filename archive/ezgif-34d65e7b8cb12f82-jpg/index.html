@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syed Sabirudeen B — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: #020617;
+      color: #ffffff;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    /* Scroll track controlling the 40-frame timeline */
+    .scroll-container {
+      height: 420vh;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Fullscreen canvas background */
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Ambient cinematic vignette */
+    .vignette-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+      background: radial-gradient(circle at 50% 50%, rgba(2, 6, 23, 0) 40%, rgba(2, 6, 23, 0.65) 100%);
+    }
+
+    /* =========================================
+       SECTION 1: "Explore MORE" (Frames 1 - 35)
+       ========================================= */
+    .explore-overlay {
+      position: fixed;
+      right: 7vw;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 10;
+      pointer-events: none;
+      user-select: none;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      will-change: transform, opacity, filter;
+      transition: opacity 0.4s ease-out, filter 0.4s ease-out;
+      perspective: 1000px;
+    }
+
+    /* Small smooth up-and-down levitating motion */
+    .explore-float-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      animation: floatUpDown 3.4s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    @keyframes floatUpDown {
+      0% {
+        transform: translateY(0px) rotateX(0deg);
+      }
+      50% {
+        transform: translateY(-16px) rotateX(3.5deg);
+      }
+      100% {
+        transform: translateY(0px) rotateX(0deg);
+      }
+    }
+
+    .explore-title {
+      font-size: clamp(3.2rem, 7.5vw, 7.5rem);
+      font-weight: 800;
+      color: #ffffff;
+      display: block;
+      -webkit-font-smoothing: antialiased;
+      text-shadow:
+        0 0 16px rgba(255, 255, 255, 0.95),
+        0 0 35px rgba(56, 189, 248, 0.75),
+        0 0 65px rgba(129, 140, 248, 0.5);
+    }
+
+    .explore-more {
+      font-size: clamp(4rem, 9.2vw, 9.2rem);
+      font-weight: 900;
+      color: #ffffff;
+      display: block;
+      letter-spacing: -0.025em;
+      -webkit-font-smoothing: antialiased;
+      text-shadow:
+        0 0 20px rgba(255, 255, 255, 1),
+        0 0 45px rgba(56, 189, 248, 0.85),
+        0 0 85px rgba(168, 85, 247, 0.6);
+    }
+
+    /* =========================================
+       SECTION 2: FRAME 40 HERO SECTION
+       ========================================= */
+    .hero-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 7vw;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(35px) scale(0.97);
+      filter: blur(10px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-wrapper.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      pointer-events: auto;
+    }
+
+    /* Top Logo / Monogram */
+    .hero-header {
+      position: absolute;
+      top: 36px;
+      left: 7vw;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.45rem;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    }
+
+    .brand-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: #00f2fe;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe;
+      animation: pulseBrandDot 1.8s ease-in-out infinite;
+    }
+
+    /* Main Hero Body Content */
+    .hero-content {
+      max-width: 860px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Eyebrow Category Tag */
+    .eyebrow-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .eyebrow-line {
+      width: 38px;
+      height: 3px;
+      background: linear-gradient(90deg, #38bdf8, #00f2fe);
+      border-radius: 2px;
+      box-shadow: 0 0 10px #38bdf8;
+      animation: expandLine 1.2s ease-out forwards;
+    }
+
+    .eyebrow-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.78rem, 1.1vw, 0.95rem);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #7dd3fc;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+    }
+
+    /* Name Headline */
+    .hero-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.8rem, 5.8vw, 5.6rem);
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+      background: linear-gradient(135deg, #ffffff 25%, #bae6fd 60%, #38bdf8 85%, #818cf8 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerGradient 7s ease-in-out infinite;
+      filter: drop-shadow(0 4px 25px rgba(56, 189, 248, 0.45));
+    }
+
+    /* Sub-headline */
+    .hero-subtitle {
+      font-size: clamp(1.25rem, 2.3vw, 2.15rem);
+      font-weight: 700;
+      color: #38bdf8;
+      line-height: 1.25;
+      text-shadow:
+        0 0 15px rgba(56, 189, 248, 0.8),
+        0 0 35px rgba(6, 182, 212, 0.5);
+      animation: subtitleGlow 3s ease-in-out infinite alternate;
+    }
+
+    /* Badge Pills Container */
+    .badges-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0.35rem 0;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+      font-weight: 600;
+      color: #f1f5f9;
+      box-shadow:
+        0 6px 20px -4px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+    }
+
+    .badge-pill:nth-child(1) { animation: floatPill 4s ease-in-out infinite 0s; }
+    .badge-pill:nth-child(2) { animation: floatPill 4s ease-in-out infinite 0.6s; }
+    .badge-pill:nth-child(3) { animation: floatPill 4s ease-in-out infinite 1.2s; }
+
+    .badge-pill:hover {
+      transform: translateY(-4px) scale(1.03);
+      border-color: #38bdf8;
+      background: rgba(14, 116, 144, 0.45);
+      box-shadow:
+        0 12px 28px -4px rgba(56, 189, 248, 0.45),
+        inset 0 0 18px rgba(56, 189, 248, 0.3);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00f2fe;
+      box-shadow: 0 0 8px #00f2fe, 0 0 16px #00f2fe;
+      animation: pulseBadgeDot 2s ease-in-out infinite;
+    }
+
+    /* Description Paragraph */
+    .hero-description {
+      font-size: clamp(0.98rem, 1.35vw, 1.25rem);
+      font-weight: 400;
+      color: #cbd5e1;
+      line-height: 1.6;
+      max-width: 680px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Cybernetic Circuit Traces (Matching reference image) */
+    .circuit-graphic {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 440px;
+      height: 520px;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.75;
+    }
+
+    .circuit-path {
+      stroke: #0ea5e9;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      fill: none;
+      filter: drop-shadow(0 0 8px #00f2fe);
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: drawCircuit 4s ease-in-out infinite alternate;
+    }
+
+    .circuit-node {
+      fill: #38bdf8;
+      filter: drop-shadow(0 0 10px #00f2fe);
+      animation: pulseNode 2.5s ease-in-out infinite alternate;
+    }
+
+    /* =========================================
+       KEYFRAME ANIMATIONS
+       ========================================= */
+    @keyframes pulseBrandDot {
+      0%, 100% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 8px #00f2fe; }
+      50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 18px #00f2fe, 0 0 30px #00f2fe; }
+    }
+
+    @keyframes pulseBadgeDot {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.35); opacity: 1; box-shadow: 0 0 12px #00f2fe; }
+    }
+
+    @keyframes pulseNode {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+
+    @keyframes shimmerGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes subtitleGlow {
+      0% {
+        text-shadow: 0 0 15px rgba(56, 189, 248, 0.75), 0 0 30px rgba(6, 182, 212, 0.4);
+      }
+      100% {
+        text-shadow: 0 0 25px rgba(56, 189, 248, 0.95), 0 0 50px rgba(6, 182, 212, 0.75), 0 0 80px rgba(14, 165, 233, 0.5);
+      }
+    }
+
+    @keyframes floatPill {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes drawCircuit {
+      0% { stroke-dashoffset: 200; opacity: 0.3; }
+      50% { stroke-dashoffset: 0; opacity: 0.85; }
+      100% { stroke-dashoffset: -200; opacity: 0.4; }
+    }
+
+    @keyframes expandLine {
+      from { width: 0; }
+      to { width: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-container"></div>
+  <canvas id="canvas"></canvas>
+  <div class="vignette-overlay"></div>
+
+  <!-- SECTION 1: "Explore MORE" (Disappears at Frame 40) -->
+  <div class="explore-overlay" id="exploreText">
+    <div class="explore-float-box">
+      <span class="explore-title">Explore</span>
+      <span class="explore-more">MORE</span>
+    </div>
+  </div>
+
+  <!-- SECTION 2: FRAME 40 HERO SECTION (Appears with Full Animation) -->
+  <div class="hero-wrapper" id="heroSection">
+    <!-- Top-left Brand Logo -->
+    <header class="hero-header">
+      <a href="#" class="brand-logo">
+        SSB <span class="brand-dot"></span>
+      </a>
+    </header>
+
+    <!-- Main Content from Reference Image -->
+    <main class="hero-content">
+      <!-- Eyebrow -->
+      <div class="eyebrow-container">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">COMPUTER SCIENCE ENGINEERING</span>
+      </div>
+
+      <!-- Main Name Headline -->
+      <h1 class="hero-name">SYED SABIRUDEEN B</h1>
+
+      <!-- Subtitle Highlight -->
+      <h2 class="hero-subtitle">Building across web, mobile, and AI.</h2>
+
+      <!-- Roles Badges -->
+      <div class="badges-container">
+        <div class="badge-pill">
+          <span class="badge-dot"></span>
+          <span>Web Developer</span>
+        </div>
+        <div class="badge-pill">
+          <span class="badge-dot"></span>
+          <span>Mobile Application Developer</span>
+        </div>
+        <div class="badge-pill">
+          <span class="badge-dot"></span>
+          <span>AI Engineer</span>
+        </div>
+      </div>
+
+      <!-- Bio Description -->
+      <p class="hero-description">
+        Exploring the intersection of interfaces, mobile applications, and intelligent systems.
+      </p>
+    </main>
+
+    <!-- Glowing Cybernetic Circuit Traces (Reference Image Right Accent) -->
+    <svg class="circuit-graphic" viewBox="0 0 440 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="circuit-path" d="M120 40 H280 L350 110 V220 L410 280 H430" />
+      <path class="circuit-path" d="M40 180 H190 L260 250 H360 L410 300 V420" style="animation-delay: 1.2s;" />
+      <path class="circuit-path" d="M180 340 H290 L340 390 H420" style="animation-delay: 2.1s;" />
+      <circle cx="280" cy="40" r="4.5" class="circuit-node" />
+      <circle cx="350" cy="110" r="4.5" class="circuit-node" />
+      <circle cx="260" cy="250" r="4.5" class="circuit-node" />
+      <circle cx="410" cy="300" r="4.5" class="circuit-node" />
+      <circle cx="340" cy="390" r="4.5" class="circuit-node" />
+    </svg>
+  </div>
+
+  <script>
+    (function () {
+      const FRAME_COUNT = 40;
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d', { alpha: false });
+      const exploreText = document.getElementById('exploreText');
+      const heroSection = document.getElementById('heroSection');
+
+      const images = [];
+      let targetProgress = 0;
+      let currentProgress = 0;
+      const ease = 0.09; // Fluid damping for buttery-smooth scrolling
+      let currentDrawnIndex = -1;
+
+      function getFrameUrl(i) {
+        const num = String(i + 1).padStart(3, '0');
+        return `ezgif-34d65e7b8cb12f82-jpg/ezgif-frame-${num}.jpg`;
+      }
+
+      function drawFrame(index) {
+        const img = images[index];
+        if (!img || !img.complete || img.naturalWidth === 0) return false;
+
+        const cw = canvas.width;
+        const ch = canvas.height;
+        const iw = img.naturalWidth;
+        const ih = img.naturalHeight;
+
+        // Cover calculation: scale image to fill viewport edge-to-edge
+        const scale = Math.max(cw / iw, ch / ih);
+        const nw = iw * scale;
+        const nh = ih * scale;
+        const nx = (cw - nw) / 2;
+        const ny = (ch - nh) / 2;
+
+        ctx.drawImage(img, 0, 0, iw, ih, nx, ny, nw, nh);
+        currentDrawnIndex = index;
+        return true;
+      }
+
+      // Preload all 40 frames into memory
+      for (let i = 0; i < FRAME_COUNT; i++) {
+        const img = new Image();
+        img.src = getFrameUrl(i);
+        img.onload = () => {
+          if (i === 0 && currentDrawnIndex === -1) {
+            drawFrame(0);
+          }
+        };
+        images.push(img);
+      }
+
+      // High-DPI canvas sizing
+      function resizeCanvas() {
+        const dpr = window.devicePixelRatio || 1;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+
+        if (currentDrawnIndex >= 0) {
+          drawFrame(currentDrawnIndex);
+        } else {
+          drawFrame(0);
+        }
+      }
+
+      function updateScrollProgress() {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        targetProgress = maxScroll > 0 ? Math.min(1, Math.max(0, scrollY / maxScroll)) : 0;
+      }
+
+      window.addEventListener('scroll', updateScrollProgress, { passive: true });
+      window.addEventListener('resize', resizeCanvas);
+
+      // Keyboard arrow keys support
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+          window.scrollBy({ top: 120, behavior: 'smooth' });
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+          window.scrollBy({ top: -120, behavior: 'smooth' });
+        }
+      });
+
+      // Synchronize text animations with background timeline
+      function updateOverlays(progress) {
+        // --- 1. "Explore MORE" Transition ---
+        // Visible from progress 0.0 to 0.72; smoothly fades out between 0.72 and 0.86; completely gone by 0.86 (Frame 35-40)
+        if (exploreText) {
+          if (progress < 0.72) {
+            // Smooth up-and-down slide wave combined with camera parallax
+            const scrollWaveY = Math.sin(progress * Math.PI * 2) * -26;
+            const parallaxY = (progress - 0.36) * -65 + scrollWaveY;
+            const parallaxX = (progress - 0.36) * -20;
+            const scale = 1 + progress * 0.10;
+            const tiltX = (progress - 0.36) * -5;
+            const brightness = 1 + progress * 0.35;
+
+            exploreText.style.opacity = '1';
+            exploreText.style.filter = `brightness(${brightness.toFixed(3)}) blur(0px)`;
+            exploreText.style.transform = `translate3d(${parallaxX}px, calc(-50% + ${parallaxY}px), 0) scale(${scale}) rotateY(-5deg) rotateX(${tiltX}deg)`;
+            exploreText.style.pointerEvents = 'none';
+          } else if (progress >= 0.72 && progress < 0.86) {
+            // Smoothly disappearing as Frame 40 nears
+            const fadeFactor = 1 - (progress - 0.72) / (0.86 - 0.72);
+            const blurVal = (1 - fadeFactor) * 12;
+            const scaleVal = 1.1 + (1 - fadeFactor) * 0.15;
+            const yOffset = -50 - (1 - fadeFactor) * 40;
+
+            exploreText.style.opacity = fadeFactor.toFixed(3);
+            exploreText.style.filter = `blur(${blurVal.toFixed(1)}px)`;
+            exploreText.style.transform = `translate3d(0, calc(-50% + ${yOffset}px), 0) scale(${scaleVal})`;
+            exploreText.style.pointerEvents = 'none';
+          } else {
+            // Completely disappeared at Frame 40
+            exploreText.style.opacity = '0';
+            exploreText.style.filter = 'blur(16px)';
+            exploreText.style.pointerEvents = 'none';
+          }
+        }
+
+        // --- 2. Frame 40 Hero Section Transition ---
+        // Hidden until progress reaches 0.78; blooms in between 0.78 and 0.92; fully interactive & animated at Frame 40 (0.92 - 1.0)
+        if (heroSection) {
+          if (progress >= 0.86) {
+            heroSection.classList.add('active');
+            // Subtle 3D reactive tilt based on terminal scrub
+            const subtleTilt = (progress - 0.93) * 6;
+            heroSection.style.transform = `perspective(1000px) rotateY(${subtleTilt.toFixed(2)}deg)`;
+          } else {
+            heroSection.classList.remove('active');
+            heroSection.style.transform = '';
+          }
+        }
+      }
+
+      // Smooth RAF loop with linear interpolation (LERP)
+      function tick() {
+        const diff = targetProgress - currentProgress;
+        if (Math.abs(diff) > 0.00005) {
+          currentProgress += diff * ease;
+        } else {
+          currentProgress = targetProgress;
+        }
+
+        const targetFrame = Math.min(
+          FRAME_COUNT - 1,
+          Math.max(0, Math.round(currentProgress * (FRAME_COUNT - 1)))
+        );
+
+        if (targetFrame !== currentDrawnIndex) {
+          if (!drawFrame(targetFrame)) {
+            // Find closest loaded fallback if target is not ready
+            for (let offset = 1; offset < FRAME_COUNT; offset++) {
+              const prev = targetFrame - offset;
+              if (prev >= 0 && images[prev] && images[prev].complete && images[prev].naturalWidth > 0) {
+                drawFrame(prev);
+                break;
+              }
+              const next = targetFrame + offset;
+              if (next < FRAME_COUNT && images[next] && images[next].complete && images[next].naturalWidth > 0) {
+                drawFrame(next);
+                break;
+              }
+            }
+          }
+        }
+
+        // Update overlay transitions based on smooth currentProgress
+        updateOverlays(currentProgress);
+
+        requestAnimationFrame(tick);
+      }
+
+      // Initialize
+      resizeCanvas();
+      updateScrollProgress();
+      currentProgress = targetProgress;
+      updateOverlays(currentProgress);
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
