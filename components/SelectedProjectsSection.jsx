@@ -9,7 +9,7 @@ export const selectedProjectsData = [
     title: "MILLION PIECE MISSION",
     category: "GENERATIVE AI · MASSIVE MOSAIC",
     brand: "U.S. AIR FORCE",
-    bpm: 128,
+    statusBadge: "120 FPS · 1.2M MESH",
     accent: "#c4b5fd", // Pastel Lilac
     image: "/images/projects/project-0-mission.jpg",
     desc: "Planetary-scale collaborative canvas assembling 1.2M fragmented memories through real-time neural graph clustering.",
@@ -40,7 +40,7 @@ export const selectedProjectsData = [
     brand: "WALL STREET JOURNAL",
     isBrandSerif: true,
     brandMark: "WSJ",
-    bpm: 104,
+    statusBadge: "REAL-TIME · 48 SATS",
     accent: "#a7f3d0", // Pastel Mint
     image: "/images/projects/project-1-sustainable.jpg",
     desc: "Real-time geospatial Earth monitoring system synthesizing satellite orbital feeds into predictive carbon emission models.",
@@ -70,7 +70,7 @@ export const selectedProjectsData = [
     category: "3D SPATIAL · INTERACTIVE ARCHIVE",
     brand: "XBOX",
     isXboxLogo: true,
-    bpm: 118,
+    statusBadge: "3D VAULT · 100+ MODELS",
     accent: "#34d399", // Cyber Emerald
     image: "/images/projects/project-2-xbox.jpg",
     desc: "Cinematic 3D virtual museum honoring two decades of gaming heritage with interactive artifacts, memory vaults, and spatial exploration.",
@@ -100,7 +100,7 @@ export const selectedProjectsData = [
     category: "VIRTUAL WORLDS · SYNTHESIZED SKIES",
     brand: "PORTER ROBINSON",
     brandMark: "【=◈︿◈=】",
-    bpm: 142,
+    statusBadge: "25K PEERS · WEBRTC",
     accent: "#fda4af", // Pastel Rose
     image: "/images/projects/project-3-secretsky.jpg",
     desc: "Multiplayer celestial festival arena rendering procedurally synthesized audio-reactive aurora skies and custom spatial acoustics.",
@@ -131,7 +131,7 @@ export const selectedProjectsData = [
     brand: "WIZARDING WORLD",
     brandMark: "Harry Potter",
     isHpFont: true,
-    bpm: 92,
+    statusBadge: "25K PARTICLES · GLSL",
     accent: "#67e8f9", // Pastel Cyan
     image: "/images/projects/project-4-patronus.jpg",
     desc: "Interactive luminescent particle experience synthesizing psychological choice vectors into a glowing, living guardian entity.",
@@ -429,6 +429,42 @@ export default function SelectedProjectsSection() {
     };
   }, [isMobile]);
 
+  // Mobile / Touch horizontal swipe tracker
+  const handleMobileScroll = () => {
+    if (!isMobile || !trackRef.current) return;
+    const track = trackRef.current;
+    const scrollLeft = track.scrollLeft;
+    const cards = cardRefs.current;
+    if (!cards || cards.length === 0) return;
+
+    const trackCenter = scrollLeft + track.clientWidth / 2;
+    let closestIdx = 0;
+    let minDiff = Infinity;
+
+    cards.forEach((card, idx) => {
+      if (!card) return;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const diff = Math.abs(cardCenter - trackCenter);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = idx;
+      }
+    });
+
+    if (closestIdx !== activeIndex) {
+      setActiveIndex(closestIdx);
+      if (titleRefs.current[closestIdx]) {
+        scrambleTitle(titleRefs.current[closestIdx]);
+      }
+    }
+
+    if (progressBarRef.current) {
+      const totalScroll = track.scrollWidth - track.clientWidth;
+      const pct = totalScroll > 0 ? (scrollLeft / totalScroll) * 100 : 0;
+      progressBarRef.current.style.width = `${Math.min(100, Math.max(0, pct)).toFixed(1)}%`;
+    }
+  };
+
   // Stage Mouse Parallax Tilt
   const handleMouseMove = (e) => {
     if (isMobile) return;
@@ -543,50 +579,61 @@ export default function SelectedProjectsSection() {
       ref={containerRef}
       id="projectsSection"
       style={{ height: isMobile ? "auto" : "260vh" }}
-      className="relative w-full"
+      className="relative w-full bg-[#060813] border-t border-white/10"
       aria-label="Selected Projects 3D Showcase"
     >
       {/* Sticky Stage Container (Pins on Desktop, Flow on Mobile) */}
       <div
         className={`w-full overflow-hidden flex flex-col items-center justify-between z-20 ${
           isMobile
-            ? "relative min-h-screen py-20 px-4 bg-[radial-gradient(circle_at_50%_30%,#0d0a20_0%,#070512_55%,#05040a_100%)]"
-            : "sticky top-0 h-screen py-8 md:py-10 px-4 md:px-8 bg-[radial-gradient(circle_at_50%_30%,#0d0a20_0%,#070512_55%,#05040a_100%)]"
+            ? "relative min-h-screen py-20 px-4 bg-[#060813]"
+            : "sticky top-0 h-screen py-8 md:py-10 px-4 md:px-8 bg-[#060813]"
         }`}
       >
-        {/* Background Canvas & Ambient Lighting */}
+        {/* Architectural Background Grid & Ambient Glow */}
+        <div className="absolute inset-0 bg-grid-architectural opacity-40 pointer-events-none z-0" />
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full pointer-events-none z-[1] opacity-75"
           aria-hidden="true"
         />
         <div
-          className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[1100px] h-[60vh] max-h-[750px] bg-[radial-gradient(ellipse_at_center,rgba(196,181,253,0.18)_0%,rgba(103,232,249,0.12)_35%,rgba(167,243,208,0.06)_60%,transparent_75%)] blur-[70px] pointer-events-none z-[2]"
+          className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] h-[60vh] max-h-[750px] bg-[radial-gradient(ellipse_at_center,rgba(0,240,255,0.12)_0%,rgba(99,102,241,0.1)_35%,rgba(232,121,249,0.06)_60%,transparent_75%)] blur-[80px] pointer-events-none z-[2]"
           aria-hidden="true"
         />
 
-        {/* Header */}
-        <div className="text-center max-w-[820px] relative z-10 shrink-0">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[rgba(167,243,208,0.08)] border border-[rgba(167,243,208,0.28)] mb-2 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#a7f3d0] shadow-[0_0_10px_#a7f3d0] animate-pulse" />
-            <span className="font-mono text-xs font-bold text-[#a7f3d0] tracking-wider">
+        {/* Section Header - Editorial Masthead */}
+        <div className="text-center max-w-3xl mx-auto relative z-10 shrink-0 px-2">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-[#080c1f]/95 border border-[#00f0ff]/50 mb-2.5 shadow-[0_0_12px_rgba(0,240,255,0.25)]">
+            <span className="w-2 h-2 rounded-none bg-[#00f0ff] animate-pulse" />
+            <span className="font-mono text-[11px] font-black text-[#00f0ff] tracking-widest uppercase">
               SELECTED WORKS · 3D PERSPECTIVE
             </span>
+            <span className="text-white/40">//</span>
+            <span className="font-mono text-[10px] text-white/60">CATALOG 2026</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight leading-tight bg-gradient-to-r from-white via-[#67e8f9] to-[#c4b5fd] bg-clip-text text-transparent mb-1.5">
-            FEATURED PROJECTS{" "}
-            <span className="font-mono text-sm sm:text-base md:text-xl font-bold text-[#67e8f9] inline-block px-2.5 py-0.5 rounded-md bg-[rgba(103,232,249,0.1)] border border-[rgba(103,232,249,0.25)] align-middle ml-1.5">
+
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2">
+            <h2
+              style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]"
+            >
+              FEATURED PROJECTS
+            </h2>
+            <span className="font-mono text-xs sm:text-sm font-black text-black bg-[#00f0ff] px-2.5 py-1 border border-white shadow-[2px_2px_0px_0px_#ffffff] align-middle">
               [ 0{activeIndex + 1} — 05 ]
             </span>
-          </h2>
-          <p className="text-xs sm:text-sm text-white/70 max-w-[620px] mx-auto leading-relaxed hidden sm:block">
-            Scroll down to orbit through the 3D spatial cards. Click any project to open deep architectural insights.
+          </div>
+
+          <p className="font-sans text-xs sm:text-sm md:text-base text-white/75 max-w-xl mx-auto leading-relaxed hidden sm:block">
+            Scroll down or drag to orbit through the 3D spatial cards. Click any project to open deep architectural insights.
           </p>
         </div>
 
         {/* 3D Stage / Mobile Horizontal Track */}
         <div
           ref={trackRef}
+          onScroll={handleMobileScroll}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           onMouseDown={handleStageMouseDown}
@@ -631,40 +678,34 @@ export default function SelectedProjectsSection() {
                   }
                 }}
                 style={initialTransform}
-                className={`rounded-[26px] bg-[rgba(10,8,22,0.78)] backdrop-blur-xl border overflow-hidden select-none shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)] ${
+                className={`bg-[#080c1f] border-2 overflow-hidden select-none ${
                   isMobile
-                    ? "relative flex-none w-[86vw] max-w-[380px] h-[480px] snap-center cursor-default border-white/20"
-                    : "absolute w-[clamp(340px,44vw,580px)] h-[clamp(370px,49vh,460px)] [transform-style:preserve-3d] cursor-pointer will-change-transform transition-[border-color,box-shadow] duration-200"
+                    ? "relative flex-none w-[84vw] max-w-[360px] h-[460px] sm:h-[480px] snap-center cursor-default border-white/20 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.8)]"
+                    : "absolute w-[clamp(320px,40vw,540px)] h-[clamp(360px,46vh,440px)] [transform-style:preserve-3d] cursor-pointer will-change-transform transition-[border-color,box-shadow] duration-200"
                 } ${
                   isActive
-                    ? "border-white/35 shadow-[0_35px_85px_-12px_rgba(0,0,0,0.96),0_0_40px_rgba(196,181,253,0.25)]"
-                    : "border-white/15 hover:border-white/25"
+                    ? "border-[#00f0ff] shadow-[0_0_35px_rgba(0,240,255,0.35),8px_8px_0px_0px_#00f0ff]"
+                    : "border-white/15 hover:border-white/35 shadow-[6px_6px_0px_0px_rgba(255,255,255,0.1)]"
                 }`}
               >
-                {/* Iridescent Border Rim */}
-                <div className="absolute inset-0 rounded-[26px] p-[1.5px] pointer-events-none z-[4] opacity-70 bg-gradient-to-br from-[#a7f3d0]/50 via-[#c4b5fd]/50 to-[#67e8f9]/50 [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [mask-composite:exclude]" />
-
-                {/* Specular Glare */}
-                <div className="absolute top-0 inset-x-0 h-1/2 rounded-t-[26px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none z-[3]" />
-
-                {/* Visual Backdrop */}
+                {/* Visual Backdrop with Scanlines & Contrast Filter */}
                 <div className="absolute inset-0 z-[1] overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover opacity-75 scale-105 transition-transform duration-700 hover:scale-100"
+                    className="w-full h-full object-cover opacity-65 scale-105 transition-transform duration-700 hover:scale-100"
                   />
-                  <div className="absolute inset-0 z-[2] bg-gradient-to-b from-black/50 via-black/75 to-black/95" />
-                  <div className="absolute inset-0 z-[3] opacity-60 bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.015)_0px,rgba(255,255,255,0.015)_1px,transparent_1px,transparent_3px)] pointer-events-none" />
+                  <div className="absolute inset-0 z-[2] bg-gradient-to-b from-black/60 via-black/80 to-[#080c1f]/98" />
+                  <div className="absolute inset-0 z-[3] opacity-25 scanline-overlay pointer-events-none" />
                 </div>
 
                 {/* Card Content Overlay */}
-                <div className="relative z-[5] h-full flex flex-col justify-between p-6 sm:p-7">
-                  {/* Top Bar */}
-                  <div className="flex items-center justify-between w-full">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 border border-white/15 backdrop-blur-md">
+                <div className="relative z-[5] h-full flex flex-col justify-between p-4 sm:p-5 md:p-6">
+                  {/* Top Bar - Architectural Badges */}
+                  <div className="flex items-center justify-between w-full gap-2">
+                    <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 bg-black/90 border border-white/25 shrink-0">
                       {project.isXboxLogo ? (
-                        <span className="w-3.5 h-3.5 text-[#34d399] font-bold">
+                        <span className="w-3.5 h-3.5 text-[#34d399] font-black">
                           ⊗
                         </span>
                       ) : project.brandMark ? (
@@ -676,48 +717,50 @@ export default function SelectedProjectsSection() {
                           {project.brandMark}
                         </span>
                       ) : (
-                        <span className="text-xs text-[#c4b5fd]">✈</span>
+                        <span className="text-xs text-[#00f0ff]">✈</span>
                       )}
-                      <span className="font-mono text-[11px] font-bold text-white/80 tracking-wider">
+                      <span className="font-mono text-[11px] font-black text-white tracking-wider">
                         {project.brand}
                       </span>
                     </div>
 
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 border border-white/20 font-mono text-xs font-bold text-white shadow-md">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 bg-black/90 border border-white/25 font-mono text-[10px] sm:text-xs font-bold text-white shadow-[2px_2px_0px_0px_rgba(255,255,255,0.15)] shrink-0">
                       <span
                         style={{
-                          backgroundColor: project.accent,
-                          boxShadow: `0 0 8px ${project.accent}`,
-                          animationDuration: `${60 / project.bpm}s`
+                          backgroundColor: project.accent
                         }}
-                        className="w-1.5 h-1.5 rounded-full animate-ping"
+                        className="w-1.5 h-1.5 rounded-none animate-ping"
                       />
-                      <span>{project.bpm} BPM</span>
+                      <span>{project.statusBadge}</span>
                     </div>
                   </div>
 
-                  {/* Main Info */}
-                  <div className="flex flex-col gap-1.5 mt-auto mb-2">
-                    <div className="font-mono text-[10px] sm:text-[11px] font-bold tracking-widest text-[#67e8f9] uppercase">
-                      {project.category}
+                  {/* Main Info - High-Contrast Editorial Display */}
+                  <div className="flex flex-col gap-1 sm:gap-1.5 mt-auto mb-2">
+                    <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] font-black tracking-widest text-[#00f0ff] uppercase">
+                      <span>[ {project.category} ]</span>
                     </div>
+
                     <h3
                       ref={(el) => {
                         titleRefs.current[idx] = el;
                       }}
                       data-original={project.title}
-                      className="font-sans text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white uppercase drop-shadow-md leading-tight"
+                      style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+                      className="text-lg sm:text-2xl md:text-3xl font-black tracking-tight text-white uppercase drop-shadow-md leading-tight"
                     >
                       {project.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-white/80 line-clamp-2 leading-relaxed">
+
+                    <p className="font-sans text-xs sm:text-sm text-white/80 line-clamp-2 leading-relaxed">
                       {project.desc}
                     </p>
-                    <div className="flex flex-wrap gap-1.5 mt-1">
+
+                    <div className="flex flex-wrap gap-1.5 mt-1 sm:mt-1.5">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="font-mono text-[10px] sm:text-[11px] font-semibold px-2 py-0.5 rounded bg-white/10 border border-white/15 text-white/90 backdrop-blur"
+                          className="font-mono text-[10px] sm:text-[11px] font-bold px-2 py-0.5 bg-black/80 border border-white/20 text-white/95"
                         >
                           {tag}
                         </span>
@@ -725,22 +768,20 @@ export default function SelectedProjectsSection() {
                     </div>
                   </div>
 
-                  {/* Interactive Action Bar (Hyper-Animated Insights Action) */}
-                  <div className="flex items-center justify-between gap-3 pt-3 border-t border-white/10">
+                  {/* Interactive Action Bar - Video-Derived Controls */}
+                  <div className="flex items-center justify-between gap-3 pt-2.5 sm:pt-3 border-t-2 border-white/10">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setActiveModalProject(project);
                       }}
-                      className="group relative inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-mono text-xs font-bold text-white bg-gradient-to-r from-[#67e8f9]/20 via-[#c4b5fd]/25 to-[#fda4af]/20 hover:from-[#67e8f9]/40 hover:via-[#c4b5fd]/45 hover:to-[#fda4af]/40 border border-[#67e8f9]/50 hover:border-[#67e8f9] shadow-[0_0_20px_rgba(103,232,249,0.25)] hover:shadow-[0_0_35px_rgba(103,232,249,0.55)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer overflow-hidden"
+                      className="group relative inline-flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 font-mono text-[11px] sm:text-xs font-black uppercase text-black bg-gradient-to-r from-[#00f0ff] to-[#38bdf8] hover:from-[#38bdf8] hover:to-[#e879f9] border border-white shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 cursor-pointer overflow-hidden"
                     >
-                      {/* Specular sheen beam running across */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
-                      <span className="w-2 h-2 rounded-full bg-[#67e8f9] shadow-[0_0_8px_#67e8f9] animate-ping" />
-                      <span className="relative z-10 bg-gradient-to-r from-white via-[#a7f3d0] to-[#67e8f9] bg-clip-text text-transparent group-hover:text-white transition-colors">
+                      <span className="w-1.5 h-1.5 rounded-none bg-black animate-ping" />
+                      <span className="relative z-10">
                         View Insights
                       </span>
-                      <span className="relative z-10 text-[#67e8f9] group-hover:rotate-180 transition-transform duration-500 font-bold">
+                      <span className="relative z-10 font-bold group-hover:rotate-90 transition-transform duration-300">
                         ✦
                       </span>
                     </button>
@@ -748,10 +789,10 @@ export default function SelectedProjectsSection() {
                     <a
                       href={project.link}
                       onClick={(e) => e.stopPropagation()}
-                      className="group font-mono text-xs font-semibold text-white/70 hover:text-white px-3.5 py-2 rounded-full hover:bg-white/10 border border-transparent hover:border-white/15 transition-all flex items-center gap-1.5"
+                      className="group font-mono text-xs font-bold text-white/80 hover:text-[#00f0ff] px-3.5 py-2 border border-transparent hover:border-[#00f0ff]/30 transition-all flex items-center gap-1.5"
                     >
                       <span>Explore</span>
-                      <span className="text-[#67e8f9] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+                      <span className="text-[#00f0ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
                     </a>
                   </div>
                 </div>
@@ -761,33 +802,33 @@ export default function SelectedProjectsSection() {
         </div>
 
         {/* Controls & Continuous Progress Bar */}
-        <div className="w-full max-w-[620px] px-4 shrink-0 flex flex-col items-center gap-2.5 z-15">
+        <div className="w-full max-w-[640px] px-4 shrink-0 flex flex-col items-center gap-3 z-15">
           <div className="flex items-center justify-between w-full">
             <button
               onClick={handlePrev}
-              className="w-10 h-10 rounded-full bg-white/5 hover:bg-[#c4b5fd]/20 border border-white/15 hover:border-[#c4b5fd] flex items-center justify-center text-white transition-all hover:scale-105 cursor-pointer"
+              className="px-4 py-2 bg-[#0c1028] hover:bg-[#00f0ff] hover:text-black border-2 border-white/20 hover:border-black font-mono text-xs font-bold text-white transition-all shadow-[2px_2px_0px_0px_rgba(56,189,248,0.2)] active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
               aria-label="Previous Project"
             >
-              ←
+              [ ← PREV ]
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               {selectedProjectsData.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => navigateToProject(i)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  className={`h-2 transition-all duration-200 cursor-pointer ${
                     i === activeIndex
-                      ? "w-7 bg-[#67e8f9] shadow-[0_0_12px_#67e8f9]"
-                      : "w-2 bg-white/25 hover:bg-white/45"
+                      ? "w-8 bg-[#00f0ff] shadow-[0_0_10px_#00f0ff]"
+                      : "w-3 bg-white/25 hover:bg-white/50"
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
             </div>
 
-            <div className="font-mono text-xs sm:text-sm font-bold text-white/70">
-              <span className="text-[#67e8f9]">
+            <div className="font-mono text-xs sm:text-sm font-black text-white/80">
+              <span className="text-[#00f0ff]">
                 0{activeIndex + 1}
               </span>{" "}
               <span className="text-white/30">/</span> 05
@@ -795,57 +836,51 @@ export default function SelectedProjectsSection() {
 
             <button
               onClick={handleNext}
-              className="w-10 h-10 rounded-full bg-white/5 hover:bg-[#c4b5fd]/20 border border-white/15 hover:border-[#c4b5fd] flex items-center justify-center text-white transition-all hover:scale-105 cursor-pointer"
+              className="px-4 py-2 bg-[#0c1028] hover:bg-[#00f0ff] hover:text-black border-2 border-white/20 hover:border-black font-mono text-xs font-bold text-white transition-all shadow-[2px_2px_0px_0px_rgba(56,189,248,0.2)] active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
               aria-label="Next Project"
             >
-              →
+              [ NEXT → ]
             </button>
           </div>
 
           {/* Real-time Continuous Orbit Scrubber Line */}
-          <div className="w-full max-w-[320px] h-[3px] bg-white/10 rounded-full overflow-hidden">
+          <div className="w-full max-w-[340px] h-[4px] bg-white/10 overflow-hidden border border-white/20">
             <div
               ref={progressBarRef}
-              className="h-full bg-gradient-to-r from-[#a7f3d0] via-[#67e8f9] to-[#c4b5fd] w-0 will-change-[width]"
+              className="h-full bg-gradient-to-r from-[#00f0ff] via-[#818cf8] to-[#e879f9] w-0 will-change-[width]"
             />
           </div>
         </div>
       </div>
 
-      {/* Hyper-Animated Deep-Dive Project Insights Modal */}
+      {/* Hyper-Animated Deep-Dive Project Insights Modal - Architectural Monograph Dossier */}
       {activeModalProject && (
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-project-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-black/85 backdrop-blur-2xl transition-all duration-300 animate-in fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-8 bg-black/90 backdrop-blur-2xl transition-all duration-200 animate-in fade-in"
           onClick={() => setActiveModalProject(null)}
         >
           <div
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[rgba(10,8,22,0.97)] border border-white/25 p-6 sm:p-8 shadow-[0_35px_90px_rgba(0,0,0,0.95)] flex flex-col gap-6 custom-scrollbar"
+            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#080c1f] border-2 border-[#00f0ff] p-6 sm:p-9 shadow-[0_0_60px_rgba(0,240,255,0.25)] flex flex-col gap-6 custom-scrollbar"
             onClick={(e) => e.stopPropagation()}
-            style={{
-              boxShadow: `0 35px 110px -15px rgba(0,0,0,0.98), 0 0 60px ${activeModalProject.accent}35`
-            }}
           >
-            {/* Top Iridescent Animated Accent Bar */}
+            {/* Top Architectural Accent Bar */}
             <div
-              className="absolute top-0 inset-x-0 h-1.5 rounded-t-3xl animate-pulse"
-              style={{
-                background: `linear-gradient(90deg, #a7f3d0, #67e8f9, ${activeModalProject.accent}, #fda4af, #a7f3d0)`
-              }}
+              className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-[#00f0ff] via-[#818cf8] via-[#e879f9] to-[#38bdf8]"
             />
 
             {/* Cybernetic Telemetry Header Badge */}
-            <div className="flex items-center justify-between w-full px-3.5 py-1.5 rounded-xl bg-black/60 border border-white/10 text-xs font-mono">
+            <div className="flex items-center justify-between w-full px-3.5 py-1.5 bg-black/80 border border-white/20 text-xs font-mono">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#a7f3d0] shadow-[0_0_8px_#a7f3d0] animate-ping" />
-                <span className="text-[#a7f3d0] tracking-widest uppercase font-bold text-[10px] sm:text-[11px]">
-                  ARCHITECTURAL TELEMETRY · 120 FPS ENGINE VERIFIED
+                <span className="w-2 h-2 rounded-none bg-[#00f0ff] animate-ping" />
+                <span className="text-[#00f0ff] tracking-widest uppercase font-black text-[10px] sm:text-[11px]">
+                  ARCHITECTURAL TELEMETRY · VERIFIED PRODUCTION BUILD
                 </span>
               </div>
-              <span className="text-white/40 tracking-wider text-[10px] hidden sm:inline">
-                ID: {activeModalProject.id.toUpperCase()}
+              <span className="text-white/50 tracking-wider text-[10px] hidden sm:inline font-mono">
+                [ ID: {activeModalProject.id.toUpperCase()} ]
               </span>
             </div>
 
@@ -853,116 +888,117 @@ export default function SelectedProjectsSection() {
             <div className="flex items-start justify-between gap-4 pt-1">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white shadow-sm">
+                  <span className="font-mono text-xs font-black px-3 py-1 bg-white text-black border border-white">
                     {activeModalProject.brand}
                   </span>
                   <span
-                    className="font-mono text-xs font-bold px-3 py-1 rounded-full border shadow-sm"
+                    className="font-mono text-xs font-black px-3 py-1 border-2"
                     style={{
-                      borderColor: `${activeModalProject.accent}70`,
+                      borderColor: activeModalProject.accent,
                       color: activeModalProject.accent,
                       backgroundColor: `${activeModalProject.accent}15`
                     }}
                   >
                     {activeModalProject.category}
                   </span>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 border border-white/15 font-mono text-xs text-white/80">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/80 border border-white/25 font-mono text-xs text-white">
                     <span
                       style={{ backgroundColor: activeModalProject.accent }}
-                      className="w-1.5 h-1.5 rounded-full animate-ping"
+                      className="w-1.5 h-1.5 rounded-none animate-ping"
                     />
-                    <span>{activeModalProject.bpm} BPM</span>
+                    <span>{activeModalProject.statusBadge}</span>
                   </div>
                 </div>
 
-                {/* Animated Gradient Title */}
+                {/* Animated Display Title */}
                 <h3
                   id="modal-project-title"
-                  className="font-sans text-2xl sm:text-4xl font-black tracking-tight leading-none bg-gradient-to-r from-white via-[#a7f3d0] via-[#67e8f9] via-[#c4b5fd] to-[#fda4af] bg-[length:200%_auto] animate-pulse bg-clip-text text-transparent drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] mt-1"
+                  style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+                  className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-none text-white uppercase drop-shadow-[0_8px_25px_rgba(0,0,0,0.9)] mt-1"
                 >
                   {activeModalProject.title}
                 </h3>
 
-                {/* Animated Subtitle with Cursor */}
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="font-sans text-sm sm:text-base text-[#67e8f9] font-bold">
+                {/* Subtitle with High-Tech Cursor */}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-mono text-xs sm:text-sm text-[#00f0ff] font-bold">
                     {activeModalProject.insights?.subtitle}
                   </span>
-                  <span className="inline-block w-2 h-4 sm:h-5 bg-[#67e8f9] animate-pulse shadow-[0_0_8px_#67e8f9]" />
+                  <span className="inline-block w-2 h-4 bg-[#00f0ff] animate-pulse" />
                 </div>
               </div>
 
               {/* Close Button with 90-degree Rotation Hover Animation */}
               <button
                 onClick={() => setActiveModalProject(null)}
-                className="group w-10 h-10 rounded-full bg-white/10 hover:bg-[#67e8f9] hover:text-black border border-white/20 hover:border-[#67e8f9] flex items-center justify-center text-white text-base transition-all duration-300 hover:rotate-90 hover:scale-110 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(103,232,249,0.6)] cursor-pointer shrink-0"
+                className="group w-10 h-10 bg-[#111738] hover:bg-[#00f0ff] hover:text-black border-2 border-white/30 hover:border-black flex items-center justify-center text-white text-base font-black transition-all duration-200 hover:rotate-90 shadow-[2px_2px_0px_0px_rgba(56,189,248,0.3)] cursor-pointer shrink-0"
                 aria-label="Close Insights Modal"
               >
                 ✕
               </button>
             </div>
 
-            {/* Interactive Tab Switcher Buttons */}
-            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-black/60 border border-white/10 w-fit overflow-x-auto">
+            {/* Interactive Tab Switcher Buttons - Physical Dossier Tabs */}
+            <div className="flex items-center gap-2 p-1 bg-black/80 border-2 border-white/15 w-fit overflow-x-auto">
               <button
                 onClick={() => setModalTab("architecture")}
-                className={`px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                className={`px-4 py-2 font-mono text-xs font-black transition-all duration-150 flex items-center gap-2 cursor-pointer ${
                   modalTab === "architecture"
-                    ? "bg-gradient-to-r from-[#67e8f9]/25 to-[#c4b5fd]/25 text-white border border-[#67e8f9]/60 shadow-[0_0_20px_rgba(103,232,249,0.3)] scale-[1.02]"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "bg-[#00f0ff] text-black shadow-[2px_2px_0px_0px_#ffffff]"
+                    : "text-white/70 hover:text-white hover:bg-white/10"
                 }`}
               >
-                <span className={modalTab === "architecture" ? "text-[#67e8f9] animate-spin" : "opacity-40"}>✦</span>
+                <span>[ 01 ]</span>
                 <span>System Architecture</span>
               </button>
 
               <button
                 onClick={() => setModalTab("metrics")}
-                className={`px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                className={`px-4 py-2 font-mono text-xs font-black transition-all duration-150 flex items-center gap-2 cursor-pointer ${
                   modalTab === "metrics"
-                    ? "bg-gradient-to-r from-[#a7f3d0]/25 to-[#67e8f9]/25 text-white border border-[#a7f3d0]/60 shadow-[0_0_20px_rgba(167,243,208,0.3)] scale-[1.02]"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "bg-[#818cf8] text-black shadow-[2px_2px_0px_0px_#ffffff]"
+                    : "text-white/70 hover:text-white hover:bg-white/10"
                 }`}
               >
-                <span className={modalTab === "metrics" ? "text-[#a7f3d0] animate-bounce" : "opacity-40"}>⚡</span>
+                <span>[ 02 ]</span>
                 <span>Metrics & Benchmarks</span>
               </button>
 
               <button
                 onClick={() => setModalTab("innovations")}
-                className={`px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                className={`px-4 py-2 font-mono text-xs font-black transition-all duration-150 flex items-center gap-2 cursor-pointer ${
                   modalTab === "innovations"
-                    ? "bg-gradient-to-r from-[#fda4af]/25 to-[#c4b5fd]/25 text-white border border-[#fda4af]/60 shadow-[0_0_20px_rgba(253,164,175,0.3)] scale-[1.02]"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "bg-[#e879f9] text-black shadow-[2px_2px_0px_0px_#ffffff]"
+                    : "text-white/70 hover:text-white hover:bg-white/10"
                 }`}
               >
-                <span className={modalTab === "innovations" ? "text-[#fda4af] animate-pulse" : "opacity-40"}>★</span>
+                <span>[ 03 ]</span>
                 <span>Deliverables & Stack</span>
               </button>
             </div>
 
             {/* TAB CONTENT 1: System Architecture */}
             {modalTab === "architecture" && (
-              <div className="flex flex-col gap-5 animate-in fade-in duration-200">
+              <div className="flex flex-col gap-5 animate-in fade-in duration-150">
                 {/* Overview Card */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 text-white/85 text-sm sm:text-base leading-relaxed shadow-inner">
+                <div className="p-4 sm:p-5 bg-white/[0.03] border-l-4 border-[#00f0ff] border-t border-r border-b border-white/15 text-white/90 text-sm sm:text-base leading-relaxed">
                   {activeModalProject.insights?.overview}
                 </div>
 
                 {/* Core Architectural Innovations */}
                 <div className="flex flex-col gap-3">
-                  <h4 className="font-mono text-xs uppercase tracking-widest text-[#a7f3d0] font-bold flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#a7f3d0] animate-pulse" />
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-[#00f0ff] font-black flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-none bg-[#00f0ff] animate-pulse" />
                     <span>Engineering Pillars & Breakthroughs</span>
                   </h4>
                   <ul className="flex flex-col gap-2.5">
                     {activeModalProject.insights?.architecture.map((point, idx) => (
                       <li
                         key={idx}
-                        className="group flex items-start gap-3 text-xs sm:text-sm text-white/85 bg-white/[0.02] hover:bg-white/[0.06] p-3 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 hover:translate-x-1.5 shadow-sm"
+                        className="group flex items-start gap-3 text-xs sm:text-sm text-white/90 bg-[#0c1028] hover:bg-white/[0.08] p-3.5 border border-white/15 hover:border-[#00f0ff] transition-all duration-200"
                       >
-                        <span className="text-[#67e8f9] font-bold text-sm mt-0.5 group-hover:rotate-45 transition-transform duration-300">
-                          ✦
+                        <span className="font-mono text-[#00f0ff] font-black text-xs mt-0.5">
+                          [ § 0{idx + 1} ]
                         </span>
                         <span className="leading-relaxed">{point}</span>
                       </li>
@@ -974,52 +1010,52 @@ export default function SelectedProjectsSection() {
 
             {/* TAB CONTENT 2: Metrics & Benchmarks */}
             {modalTab === "metrics" && (
-              <div className="flex flex-col gap-4 animate-in fade-in duration-200">
+              <div className="flex flex-col gap-4 animate-in fade-in duration-150">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                   {activeModalProject.insights?.metrics.map((m, idx) => (
                     <div
                       key={idx}
-                      className="group p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-[#67e8f9]/50 flex flex-col gap-1.5 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(103,232,249,0.25)]"
+                      className="group p-4 bg-[#0c1028] hover:bg-[#111738] border-2 border-white/15 hover:border-[#00f0ff] flex flex-col gap-1.5 transition-all duration-200 shadow-[2px_2px_0px_0px_rgba(56,189,248,0.15)] hover:shadow-[0_0_20px_rgba(0,240,255,0.35)]"
                     >
                       <span className="font-mono text-[10px] uppercase tracking-wider text-white/50 group-hover:text-white/80 transition-colors">
                         {m.label}
                       </span>
                       <span
-                        className="font-mono text-base sm:text-lg font-black drop-shadow-[0_0_10px_currentColor]"
+                        className="font-mono text-lg sm:text-xl font-black"
                         style={{ color: activeModalProject.accent }}
                       >
                         {m.value}
                       </span>
-                      <div className="w-8 h-0.5 rounded-full bg-white/20 group-hover:w-full group-hover:bg-[#67e8f9] transition-all duration-300 mt-1" />
+                      <div className="w-8 h-1 bg-white/20 group-hover:w-full group-hover:bg-[#00f0ff] transition-all duration-300 mt-1" />
                     </div>
                   ))}
                 </div>
 
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between text-xs font-mono text-white/70">
+                <div className="p-4 bg-black/60 border border-white/15 flex items-center justify-between text-xs font-mono text-white/70">
                   <span className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#67e8f9] animate-pulse" />
+                    <span className="w-2 h-2 rounded-none bg-[#00f0ff] animate-pulse" />
                     <span>BENCHMARK RIG: Chromium WebGL 2.0 / Apple Metal / Windows Direct3D 12</span>
                   </span>
-                  <span className="text-[#a7f3d0] font-bold">100% PASS</span>
+                  <span className="text-[#00f0ff] font-black bg-[#00f0ff]/10 px-2 py-0.5 border border-[#00f0ff]/30">100% PASS</span>
                 </div>
               </div>
             )}
 
             {/* TAB CONTENT 3: Deliverables & Stack */}
             {modalTab === "innovations" && (
-              <div className="flex flex-col gap-4 animate-in fade-in duration-200">
+              <div className="flex flex-col gap-4 animate-in fade-in duration-150">
                 <div className="flex flex-col gap-2.5">
-                  <h4 className="font-mono text-xs uppercase tracking-widest text-[#67e8f9] font-bold flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#67e8f9] animate-pulse" />
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-[#00f0ff] font-black flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-none bg-[#00f0ff] animate-pulse" />
                     <span>Verified Project Deliverables</span>
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {activeModalProject.insights?.deliverables.map((deliv) => (
                       <span
                         key={deliv}
-                        className="font-mono text-xs font-bold px-3 py-1.5 rounded-xl bg-[#67e8f9]/10 border border-[#67e8f9]/30 text-[#67e8f9] hover:bg-[#67e8f9]/20 transition-colors flex items-center gap-1.5 shadow-sm"
+                        className="font-mono text-xs font-bold px-3 py-1.5 bg-[#00f0ff]/10 border-2 border-[#00f0ff]/50 text-[#00f0ff] flex items-center gap-2"
                       >
-                        <span>✓</span>
+                        <span className="font-black">✓</span>
                         <span>{deliv}</span>
                       </span>
                     ))}
@@ -1027,14 +1063,14 @@ export default function SelectedProjectsSection() {
                 </div>
 
                 <div className="flex flex-col gap-2.5 pt-2">
-                  <h4 className="font-mono text-xs uppercase tracking-widest text-white/50 font-bold">
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-white/50 font-black">
                     Core Technical Stack
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {activeModalProject.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-xs font-semibold px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 hover:border-white/30 text-white/95 transition-all shadow-sm"
+                        className="font-mono text-xs font-bold px-3 py-1.5 bg-white/10 hover:bg-[#00f0ff] hover:text-black border border-white/20 hover:border-black text-white/95 transition-all shadow-sm"
                       >
                         {tag}
                       </span>
@@ -1044,34 +1080,33 @@ export default function SelectedProjectsSection() {
               </div>
             )}
 
-            {/* Modal Footer with Hyper-Animated Action Buttons */}
-            <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/10 mt-2 flex-wrap">
+            {/* Modal Footer with Video-Derived Controls */}
+            <div className="flex items-center justify-between gap-3 pt-4 border-t-2 border-white/10 mt-2 flex-wrap">
               <div className="flex items-center gap-2.5">
                 <button
                   onClick={() => setActiveModalProject(null)}
-                  className="px-5 py-2.5 rounded-full font-mono text-xs font-semibold text-white/70 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/25 transition-all hover:scale-105 cursor-pointer"
+                  className="px-5 py-2.5 font-mono text-xs font-bold text-white/80 hover:text-white bg-[#0f1433] hover:bg-white/15 border border-white/20 transition-all cursor-pointer"
                 >
-                  Close
+                  Close [ESC]
                 </button>
                 <button
                   onClick={handleCopySpecs}
-                  className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-full font-mono text-xs font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#67e8f9] transition-all hover:scale-105 cursor-pointer shadow-md"
+                  className="group inline-flex items-center gap-2 px-4 py-2.5 font-mono text-xs font-black uppercase text-white bg-[#0f1433] hover:bg-[#00f0ff] hover:text-black border-2 border-white/30 hover:border-black transition-all cursor-pointer shadow-[2px_2px_0px_0px_rgba(56,189,248,0.25)]"
                 >
                   <span>{copiedSpecs ? "Specs Copied! ✓" : "Copy Specs 📋"}</span>
                 </button>
               </div>
 
-              {/* Specular Liquid Animated Prototype Launch Button */}
+              {/* High-Impact Action Button */}
               <a
                 href={activeModalProject.link}
-                className="group relative inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 rounded-full font-sans text-xs sm:text-sm font-black text-black bg-gradient-to-r from-[#a7f3d0] via-[#67e8f9] to-[#c4b5fd] shadow-[0_0_25px_rgba(103,232,249,0.5)] hover:shadow-[0_0_40px_rgba(103,232,249,0.85)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer overflow-hidden"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3 font-mono text-xs sm:text-sm font-black uppercase text-black bg-gradient-to-r from-[#00f0ff] to-[#38bdf8] hover:from-[#38bdf8] hover:to-[#e879f9] border-2 border-white shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_25px_rgba(232,121,249,0.5)] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all duration-200 cursor-pointer overflow-hidden"
               >
                 <span className="relative z-10">Launch Prototype</span>
-                <span className="relative z-10 text-base transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                <span className="relative z-10 text-base font-black transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
                   ↗
                 </span>
-                {/* Continuous specular reflection sheen beam */}
-                <div className="absolute inset-0 bg-white/40 -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+                <div className="absolute inset-0 bg-white/40 -translate-x-full group-hover:translate-x-full transition-transform duration-500 pointer-events-none" />
               </a>
             </div>
           </div>

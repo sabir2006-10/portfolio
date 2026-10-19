@@ -49,7 +49,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#05040a] text-white selection:bg-[#67e8f9] selection:text-black">
+    <main className="min-h-screen bg-[#060813] text-white selection:bg-[#00f0ff] selection:text-black">
       {/* Floating Cybernetic Navbar */}
       <Navbar />
 

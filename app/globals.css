@@ -1,50 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #05040a;
-  --foreground: #ffffff;
-  --pastel-mint: #a7f3d0;
-  --pastel-cyan: #67e8f9;
-  --pastel-lilac: #c4b5fd;
-  --pastel-rose: #fda4af;
-  --pastel-gold: #fef08a;
+  /* Video-Derived Color Palette (Extracted directly from Hero Video & Frame 40) */
+  --background: #060813;
+  --foreground: #f8fafc;
+  
+  /* Deep Midnight Grounds (Desk & Cosmic Night Sky) */
+  --bg-midnight: #060813;
+  --bg-space-navy: #0b0f24;
+  --bg-astral-surface: #111634;
+  --bg-astral-card: rgba(11, 15, 36, 0.85);
+
+  /* Primary Electric Hologram (HUD Displays & Laser Traces) */
+  --cyan-hologram: #00f0ff;
+  --sky-core: #38bdf8;
+  --sapphire-deep: #0284c7;
+
+  /* Atmospheric Ultraviolet & Indigo (Nebulae & Studio Rim Lights) */
+  --ultraviolet: #6366f1;
+  --violet-laser: #818cf8;
+  --lavender-mist: #c4b5fd;
+
+  /* Celestial Orchid & Magenta (Frame 40 Orbital Celestial Ring & Laptop LED) */
+  --orchid-neon: #e879f9;
+  --magenta-flare: #d946ef;
+  --rose-quantum: #fb7185;
+
+  /* Stellar Starlight Gold (Hackathon Honors) */
+  --stellar-amber: #f59e0b;
+  --starlight-gold: #fbbf24;
+
+  /* Typography Neutrals */
+  --text-starlight: #f8fafc;
+  --text-frost: #e2e8f0;
+  --text-slate-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Structural Hairlines */
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-cyan: rgba(0, 240, 255, 0.35);
+  --border-violet: rgba(99, 102, 241, 0.35);
+  --border-orchid: rgba(232, 121, 249, 0.35);
+
+  /* Legacy variable compatibility */
+  --acid-lime: #00f0ff;
+  --cyber-cyan: #38bdf8;
+  --solar-orange: #e879f9;
+  --prismatic-lilac: #818cf8;
+  --holographic-gold: #fbbf24;
+  --hot-magenta: #d946ef;
+  --bone-white: #f8fafc;
+  --carbon-900: #060813;
+  --carbon-800: #0b0f24;
+  --carbon-700: #111634;
+  --pastel-mint: #38bdf8;
+  --pastel-cyan: #00f0ff;
+  --pastel-lilac: #818cf8;
+  --pastel-rose: #e879f9;
+  --pastel-gold: #fbbf24;
   --cyber-blue: #38bdf8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-syne), var(--font-geist-sans), sans-serif;
+  --font-sans: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), var(--font-geist-mono), monospace;
 }
 
 html {
-  background-color: #05040a;
+  background-color: #060813;
 }
 
 body {
-  background-color: #05040a;
-  color: #ffffff;
+  background-color: #060813;
+  color: #f8fafc;
+  font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
   overflow-x: clip;
 }
 
-/* Custom Scrollbar */
+/* Bespoke Video-Derived Cinematic Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #060813;
+  border-left: 1px solid rgba(56, 189, 248, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(196, 181, 253, 0.35);
-  border-radius: 9999px;
+  background: #171f45;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #67e8f9;
+  background: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
 }
 
 /* 3D Perspective Utilities */
@@ -56,7 +111,63 @@ body {
   perspective: 1200px;
 }
 
-/* Continuous Marquee Animation (Reference Video Marquee Effect) */
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+/* Architectural Celestial Hologram Background Grid */
+.bg-grid-architectural {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+}
+
+.bg-dot-matrix {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(56, 189, 248, 0.15) 1px, transparent 1px);
+}
+
+/* Video-Derived Holographic Surfaces */
+.video-surface-card {
+  background: rgba(11, 15, 36, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  box-shadow: 4px 4px 0px 0px rgba(56, 189, 248, 0.12);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.video-surface-card:hover {
+  border-color: #00f0ff;
+  box-shadow: 6px 6px 0px 0px rgba(0, 240, 255, 0.3), 0 0 25px rgba(0, 240, 255, 0.18);
+  transform: translate(-2px, -2px);
+}
+
+.brutalist-card {
+  background: rgba(11, 15, 36, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  box-shadow: 4px 4px 0px 0px rgba(56, 189, 248, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brutalist-card:hover {
+  border-color: #00f0ff;
+  box-shadow: 6px 6px 0px 0px #00f0ff;
+  transform: translate(-2px, -2px);
+}
+
+.brutalist-card-cyan:hover {
+  border-color: #00f0ff;
+  box-shadow: 6px 6px 0px 0px #00f0ff;
+  transform: translate(-2px, -2px);
+}
+
+.brutalist-card-orange:hover {
+  border-color: #e879f9;
+  box-shadow: 6px 6px 0px 0px #e879f9;
+  transform: translate(-2px, -2px);
+}
+
+/* Continuous Marquee Animation */
 @keyframes marqueeLeft {
   0% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-50%, 0, 0); }
@@ -70,14 +181,14 @@ body {
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: marqueeLeft 50s linear infinite;
+  animation: marqueeLeft 42s linear infinite;
   will-change: transform;
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: marqueeRight 50s linear infinite;
+  animation: marqueeRight 42s linear infinite;
   will-change: transform;
 }
 
@@ -86,3 +197,29 @@ body {
   animation-play-state: paused;
 }
 
+/* Cinematic Holographic Scanline Overlay */
+.scanline-overlay {
+  background: linear-gradient(
+    rgba(6, 8, 19, 0) 50%, 
+    rgba(0, 0, 0, 0.2) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(0, 240, 255, 0.02),
+    rgba(99, 102, 241, 0.02),
+    rgba(232, 121, 249, 0.02)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Corner Registration Crosshair Utility */
+.registration-crosshair {
+  position: relative;
+}
+
+.registration-crosshair::before,
+.registration-crosshair::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}

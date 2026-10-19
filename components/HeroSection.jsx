@@ -210,11 +210,17 @@ export default function HeroSection() {
       }
     };
 
+    let cachedHeroHeight = 0;
+    const recalculateHeroHeight = () => {
+      if (trackRef.current) {
+        cachedHeroHeight = Math.max(1, trackRef.current.offsetHeight - window.innerHeight);
+      }
+    };
+
     const updateScrollProgress = () => {
-      if (!trackRef.current) return;
+      if (!cachedHeroHeight) recalculateHeroHeight();
       const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-      const heroHeight = trackRef.current.offsetHeight - window.innerHeight;
-      targetProgress = Math.min(1.0, Math.max(0.0, scrollY / Math.max(heroHeight, 1)));
+      targetProgress = Math.min(1.0, Math.max(0.0, scrollY / cachedHeroHeight));
     };
 
     // Smooth fluid LERP animation loop with continuous time clock
@@ -231,9 +237,16 @@ export default function HeroSection() {
       animId = requestAnimationFrame(tick);
     };
 
-    window.addEventListener("scroll", updateScrollProgress, { passive: true });
-    window.addEventListener("resize", resizeCanvas);
+    const handleResize = () => {
+      recalculateHeroHeight();
+      resizeCanvas();
+      updateScrollProgress();
+    };
 
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    window.addEventListener("resize", handleResize);
+
+    recalculateHeroHeight();
     resizeCanvas();
     updateScrollProgress();
     currentProgress = targetProgress;
@@ -245,7 +258,7 @@ export default function HeroSection() {
       isDisposed = true;
       cancelAnimationFrame(animId);
       window.removeEventListener("scroll", updateScrollProgress);
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -261,16 +274,16 @@ export default function HeroSection() {
     <section
       ref={trackRef}
       id="heroScrollTrack"
-      className="relative w-full bg-[#020617]"
+      className="relative w-full bg-[#060813]"
       style={{ height: "600vh" }}
       aria-label="Interactive Hero Showcase"
     >
       {/* Sticky Fullscreen Stage */}
       <div className="sticky top-0 left-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Ambient Pale Blush Atmosphere Behind Framed Artifact */}
+        {/* Ambient Pale Blush Atmosphere Behind Framed Artifact - Video-Derived Nebula Glow */}
         <div
           ref={blushBackdropRef}
-          className="absolute inset-0 pointer-events-none z-0 opacity-0 transition-opacity duration-300 bg-[radial-gradient(ellipse_at_50%_35%,rgba(253,164,175,0.25)_0%,rgba(196,181,253,0.2)_45%,rgba(5,4,10,0.95)_85%)]"
+          className="absolute inset-0 pointer-events-none z-0 opacity-0 transition-opacity duration-300 bg-[radial-gradient(ellipse_at_50%_35%,rgba(0,240,255,0.18)_0%,rgba(99,102,241,0.16)_40%,rgba(232,121,249,0.12)_65%,rgba(6,8,19,0.98)_90%)]"
         />
 
         {/* Video / Canvas Frame Container with Center Transform Origin */}
@@ -285,322 +298,373 @@ export default function HeroSection() {
             className="absolute inset-0 w-full h-full block pointer-events-none"
           />
 
-          {/* Vignette Depth Gradient */}
-          <div className="absolute inset-0 pointer-events-none z-20 bg-[radial-gradient(circle_at_50%_50%,rgba(2,6,23,0)_40%,rgba(2,6,23,0.5)_75%,rgba(2,6,23,0.9)_100%)]" />
+          {/* Architectural Vignette & Scanline Texture Overlay */}
+          <div className="absolute inset-0 pointer-events-none z-20 bg-[radial-gradient(circle_at_50%_50%,rgba(6,8,19,0)_35%,rgba(6,8,19,0.65)_70%,rgba(6,8,19,0.96)_100%)]" />
+          <div className="absolute inset-0 pointer-events-none z-20 opacity-20 scanline-overlay" />
         </div>
 
-        {/* "Let's Explore" Floating Typography at Right Side Bottom */}
+        {/* "Let's Explore" Floating Typography at Right Side Bottom - Avant-Garde Cover Layout */}
         <div
           ref={exploreTextRef}
-          className="absolute right-6 sm:right-10 lg:right-14 bottom-8 sm:bottom-10 lg:bottom-12 flex flex-col items-end z-30 pointer-events-none select-none will-change-transform"
+          className="absolute right-4 sm:right-8 lg:right-12 bottom-10 sm:bottom-12 lg:bottom-14 flex flex-col items-end z-30 pointer-events-none select-none will-change-transform"
         >
           <div className="flex flex-col items-end text-right">
-            {/* Ambient Glowing Action Pill: Always Visible Below Navbar */}
+            {/* Ambient Action Pill: Video-derived Holographic Clickable Pill */}
             <button
               onClick={scrollToProjects}
-              className="group pointer-events-auto cursor-pointer inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 hover:border-[#67e8f9]/60 backdrop-blur-md mb-2.5 shadow-[0_0_20px_rgba(103,232,249,0.35)] transition-all duration-300 hover:scale-105"
+              className="group pointer-events-auto cursor-pointer inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-black/85 hover:bg-[#00f0ff] border-2 border-[#00f0ff] text-[#00f0ff] hover:text-black mb-2 sm:mb-3 shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_20px_rgba(232,121,249,0.4)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5"
               aria-label="Scroll down to explore projects"
               title="Click to scroll down"
             >
-              <span className="w-2 h-2 rounded-full bg-[#67e8f9] shadow-[0_0_8px_#67e8f9] animate-ping" />
-              <span className="font-mono text-[11px] font-bold tracking-widest text-[#a7f3d0] uppercase">
+              <span className="w-2 h-2 rounded-none bg-[#00f0ff] group-hover:bg-black shadow-[0_0_8px_#00f0ff] animate-ping" />
+              <span className="font-mono text-[10px] sm:text-[11px] font-black tracking-widest uppercase">
                 SCROLL DOWN TO EXPLORE
               </span>
-              <span className="text-[#67e8f9] font-bold transition-transform duration-300 group-hover:translate-y-0.5">
+              <span className="font-bold text-xs sm:text-sm transition-transform duration-200 group-hover:translate-y-0.5">
                 ↓
               </span>
             </button>
 
-            {/* Stacked Large Display Typography */}
-            <span className="font-sans font-black text-4xl sm:text-6xl lg:text-8xl xl:text-9xl tracking-tight leading-none bg-gradient-to-r from-white via-[#a7f3d0] to-[#67e8f9] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(167,243,208,0.35)]">
-              Let's
-            </span>
-            <span className="font-sans font-black text-4xl sm:text-6xl lg:text-8xl xl:text-9xl tracking-tight leading-none bg-gradient-to-r from-[#67e8f9] via-[#c4b5fd] to-[#fda4af] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(196,181,253,0.35)]">
-              Explore
-            </span>
+            {/* Architectural Coordinates Meta Tag */}
+            <div className="font-mono text-[9px] sm:text-[10px] text-white/50 tracking-widest mb-1 hidden sm:block uppercase">
+              [ 13.0827° N // 80.2707° E // ISSUE 2026 ]
+            </div>
 
-            {/* Subtle Gradient Accent Bar */}
-            <div className="w-20 sm:w-24 h-1 rounded-full bg-gradient-to-r from-[#67e8f9] via-[#c4b5fd] to-[#fda4af] mt-3 sm:mt-3.5 shadow-[0_0_15px_#67e8f9]" />
-          </div>
-        </div>
-
-        {/* Hero Profile Bloom (Reveals at Frame 40, Generous Top Clearance Below Navbar) */}
-        <div
-          ref={heroContentRef}
-          className="absolute inset-0 z-40 flex items-center justify-between px-5 sm:px-12 lg:px-20 pt-24 sm:pt-28 lg:pt-32 pb-8 pointer-events-none opacity-0 transition-opacity duration-300"
-        >
-          <div className="max-w-3xl lg:max-w-4xl flex flex-col items-start gap-3.5 sm:gap-4 pointer-events-auto">
-            {/* Eyebrow with Clear Navbar Clearance */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.06] border border-white/15 backdrop-blur-md shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#a7f3d0] shadow-[0_0_10px_#a7f3d0] animate-pulse" />
-              <span className="font-mono text-[10px] sm:text-xs font-bold tracking-widest text-[#a7f3d0] uppercase">
-                COMPUTER SCIENCE ENGINEERING
+            {/* Monumental Avant-Garde Display Typography - Video-Derived Hologram Palette */}
+            <div className="flex flex-col items-end leading-[0.88] tracking-tight">
+              <span
+                style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+                className="font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white uppercase drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]"
+              >
+                Let's
+              </span>
+              <span
+                style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+                className="font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-[#00f0ff] uppercase drop-shadow-[0_12px_30px_rgba(0,240,255,0.4)] -mt-1 sm:-mt-2"
+              >
+                Explore
               </span>
             </div>
 
-            {/* Name Heading: Single Line Guaranteed Across All Displays */}
-            <h1 className="font-sans font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-none whitespace-nowrap bg-gradient-to-r from-white via-[#c4b5fd] via-[#67e8f9] to-[#a7f3d0] bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)] select-none">
-              SYED SABIRUDEEN B
-            </h1>
-
-            {/* Subtitle with High-Tech Cursor Pulse */}
-            <h2 className="font-sans text-sm sm:text-xl lg:text-2xl font-bold text-white/95 flex flex-wrap items-center gap-2">
-              <span>Architecting fluid web, 3D spatial & AI platforms.</span>
-              <span className="inline-block w-2 h-3.5 sm:h-5 bg-[#67e8f9] animate-pulse" />
-            </h2>
-
-            {/* Animated Interactive Role Badges */}
-            <div className="flex flex-wrap gap-2.5 my-0.5">
-              <div className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#67e8f9]/50 backdrop-blur-md text-xs font-semibold text-white/90 transition-all duration-300 hover:scale-105 shadow-md">
-                <span className="w-2 h-2 rounded-full bg-[#67e8f9] shadow-[0_0_8px_#67e8f9] group-hover:scale-125 transition-transform" />
-                <span>Web Architecture & Systems</span>
-              </div>
-              <div className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#a7f3d0]/50 backdrop-blur-md text-xs font-semibold text-white/90 transition-all duration-300 hover:scale-105 shadow-md">
-                <span className="w-2 h-2 rounded-full bg-[#a7f3d0] shadow-[0_0_8px_#a7f3d0] group-hover:scale-125 transition-transform" />
-                <span>Mobile & Spatial 3D</span>
-              </div>
-              <div className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#fda4af]/50 backdrop-blur-md text-xs font-semibold text-white/90 transition-all duration-300 hover:scale-105 shadow-md">
-                <span className="w-2 h-2 rounded-full bg-[#fda4af] shadow-[0_0_8px_#fda4af] group-hover:scale-125 transition-transform" />
-                <span>Agentic AI & Neural Pipelines</span>
-              </div>
-            </div>
-
-            {/* Description Text */}
-            <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed max-w-xl">
-              Exploring the intersection of{" "}
-              <span className="text-[#67e8f9] font-bold">fluid reactive interfaces</span>,{" "}
-              <span className="text-[#a7f3d0] font-bold">3D spatial graphics</span>, and{" "}
-              <span className="text-[#c4b5fd] font-bold">autonomous agent systems</span>. Driven by rapid prototyping and zero-failure engineering.
-            </p>
-
-            {/* Interactive Animated Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 mt-1.5">
-              <button
-                onClick={scrollToProjects}
-                className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-sans text-sm font-bold text-black bg-gradient-to-r from-[#a7f3d0] via-[#67e8f9] to-[#c4b5fd] shadow-[0_0_25px_rgba(103,232,249,0.45)] hover:shadow-[0_0_40px_rgba(103,232,249,0.7)] transition-all duration-300 hover:scale-105 cursor-pointer overflow-hidden"
-              >
-                <span className="relative z-10">View 3D Projects</span>
-                <span className="relative z-10 text-base transition-transform duration-300 group-hover:translate-y-0.5">
-                  ↓
-                </span>
-                {/* Specular button sheen animation */}
-                <div className="absolute inset-0 bg-white/30 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none" />
-              </button>
-
-              <a
-                href="#contactSection"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-sans text-sm font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#67e8f9] backdrop-blur-xl transition-all duration-300 hover:scale-105 shadow-md"
-              >
-                <span>Let's Connect</span>
-                <span className="text-white/60 group-hover:text-[#67e8f9] transition-colors">
-                  ✉
-                </span>
-              </a>
+            {/* Industrial Accent Rule & Calibration Ticks */}
+            <div className="flex items-center gap-1.5 mt-2 sm:mt-3">
+              <span className="font-mono text-[9px] text-[#00f0ff] font-bold">01 // 40</span>
+              <div className="w-20 sm:w-28 h-1 bg-gradient-to-r from-[#00f0ff] to-[#e879f9] shadow-[0_0_10px_#00f0ff]" />
+              <div className="w-2.5 h-1 bg-white" />
+              <div className="w-1.5 h-1 bg-[#818cf8]" />
             </div>
           </div>
+        </div>
 
-          {/* Animated Cybernetic Circuit SVG with Pulsing Energy Grid */}
-          <div className="hidden lg:block relative w-[360px] h-[420px] pointer-events-none select-none">
-            <svg
-              className="w-full h-full drop-shadow-[0_0_25px_rgba(103,232,249,0.35)]"
-              viewBox="0 0 460 520"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <style>{`
-                @keyframes flowTrack1 {
-                  0% { stroke-dashoffset: 48; }
-                  100% { stroke-dashoffset: 0; }
-                }
-                @keyframes flowTrack2 {
-                  0% { stroke-dashoffset: 0; }
-                  100% { stroke-dashoffset: 48; }
-                }
-                @keyframes rotateCoreRing {
-                  0% { transform: rotate(0deg); }
-                  100% { transform: rotate(360deg); }
-                }
-                .flow-dash-1 {
-                  stroke-dasharray: 8 6;
-                  animation: flowTrack1 2.2s linear infinite;
-                }
-                .flow-dash-2 {
-                  stroke-dasharray: 10 7;
-                  animation: flowTrack2 2.8s linear infinite;
-                }
-                .flow-dash-3 {
-                  stroke-dasharray: 6 5;
-                  animation: flowTrack1 1.6s linear infinite;
-                }
-                .core-ring {
-                  transform-origin: 260px 250px;
-                  animation: rotateCoreRing 18s linear infinite;
-                }
-              `}</style>
+        {/* Hero Profile Bloom (Reveals at Frame 40, Perfectly Sized & Centered with Zero Overflow) */}
+        <div
+          ref={heroContentRef}
+          className="absolute inset-0 z-40 flex items-center justify-center px-4 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-10 sm:pb-12 pointer-events-none opacity-0 transition-opacity duration-300"
+        >
+          <div className="w-full max-w-6xl mx-auto flex items-center justify-between gap-6 lg:gap-10 pointer-events-auto">
+            {/* Left Content Column - Precision Sizing and Alignment */}
+            <div className="flex-1 max-w-2xl flex flex-col items-start gap-2.5 sm:gap-3.5">
+              {/* Eyebrow - Video Hologram Technical Stamp */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#080c1f]/95 border border-[#00f0ff]/60 text-[#00f0ff] font-mono text-[10px] sm:text-xs font-black tracking-widest uppercase shadow-[0_0_10px_rgba(0,240,255,0.25)]">
+                <span className="w-1.5 h-1.5 bg-[#00f0ff] animate-pulse" />
+                <span>COMPUTER SCIENCE ENGINEERING</span>
+                <span className="text-white/40">//</span>
+                <span className="text-white text-[10px]">SPEC: 2026</span>
+              </div>
 
-              {/* Base Circuit Traces (Static Dim Grid) */}
-              <path
-                d="M110 40 H280 L350 110 V220 L410 280 H440"
-                stroke="rgba(255,255,255,0.12)"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M30 180 H190 L260 250 H360 L410 300 V430"
-                stroke="rgba(255,255,255,0.12)"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M180 340 H290 L340 390 H430"
-                stroke="rgba(255,255,255,0.12)"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M260 80 V170 L220 210 H140"
-                stroke="rgba(255,255,255,0.1)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <path
-                d="M300 250 L350 300 H440"
-                stroke="rgba(255,255,255,0.1)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
+              {/* Name Heading: Controlled Monumental Scale with Video Cyan Accent */}
+              <div className="flex flex-col gap-1 w-full">
+                <h1
+                  style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+                  className="font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl tracking-tight leading-[1.08] text-white uppercase drop-shadow-[0_8px_30px_rgba(0,0,0,0.95)] select-none"
+                >
+                  SYED SABIRUDEEN <span className="text-[#00f0ff]">B</span>
+                </h1>
+                <div className="flex items-center gap-2 w-full max-w-md">
+                  <div className="h-0.5 flex-1 bg-gradient-to-r from-[#00f0ff] via-[#818cf8] to-transparent" />
+                  <span className="font-mono text-[9px] sm:text-[10px] text-white/50 font-bold uppercase tracking-widest">
+                    [ FOLIO // ARCHITECT ]
+                  </span>
+                </div>
+              </div>
 
-              {/* Animated Flowing Laser Energy Beams */}
-              <path
-                d="M110 40 H280 L350 110 V220 L410 280 H440"
-                stroke="url(#circuit-grad1)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                className="flow-dash-1"
-              />
-              <path
-                d="M30 180 H190 L260 250 H360 L410 300 V430"
-                stroke="url(#circuit-grad2)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                className="flow-dash-2"
-              />
-              <path
-                d="M180 340 H290 L340 390 H430"
-                stroke="url(#circuit-grad1)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                className="flow-dash-3"
-              />
-              <path
-                d="M260 80 V170 L220 210 H140"
-                stroke="url(#circuit-grad3)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                className="flow-dash-1"
-              />
+              {/* Subtitle with High-Tech Cyan Terminal Cursor */}
+              <h2 className="font-mono text-xs sm:text-sm md:text-base lg:text-lg font-bold text-white/90 leading-snug">
+                <span>Architecting fluid web, 3D spatial &amp; AI platforms.</span>
+                <span className="inline-block w-2 h-3.5 sm:h-4 bg-[#00f0ff] ml-2 align-middle animate-pulse shadow-[0_0_8px_#00f0ff]" />
+              </h2>
 
-              {/* Central Holographic Quantum Core */}
-              <g className="core-ring">
-                <circle
-                  cx="260"
-                  cy="250"
-                  r="24"
-                  stroke="url(#circuit-grad1)"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 4"
-                  fill="none"
+              {/* Role Badges: Video-Derived Hologram Specimen Tags */}
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-[#0b0f24] hover:bg-[#00f0ff] hover:text-black border border-[#00f0ff]/40 font-mono text-[10px] sm:text-[11px] md:text-xs font-bold text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,240,255,0.2)] cursor-default">
+                  <span className="text-[#00f0ff] font-bold">[ W.01 ]</span>
+                  <span>Web Architecture & Systems</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-[#0b0f24] hover:bg-[#818cf8] hover:text-black border border-[#818cf8]/40 font-mono text-[10px] sm:text-[11px] md:text-xs font-bold text-white transition-all shadow-[2px_2px_0px_0px_rgba(129,140,248,0.2)] cursor-default">
+                  <span className="text-[#818cf8] font-bold">[ M.02 ]</span>
+                  <span>Mobile & Spatial 3D</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-[#0b0f24] hover:bg-[#e879f9] hover:text-black border border-[#e879f9]/40 font-mono text-[10px] sm:text-[11px] md:text-xs font-bold text-white transition-all shadow-[2px_2px_0px_0px_rgba(232,121,249,0.2)] cursor-default">
+                  <span className="text-[#e879f9] font-bold">[ A.03 ]</span>
+                  <span>Agentic AI & Neural Pipelines</span>
+                </div>
+              </div>
+
+              {/* Description Text - Crisp, Anchored Left Border, 100% Fully Visible */}
+              <p className="font-sans text-xs sm:text-sm md:text-[15px] text-white/85 leading-relaxed max-w-xl border-l-2 border-[#00f0ff] pl-3.5 py-1 bg-white/[0.02]">
+                Exploring the intersection of{" "}
+                <span className="text-[#00f0ff] font-semibold border-b border-[#00f0ff]/40">fluid reactive interfaces</span>,{" "}
+                <span className="text-[#818cf8] font-semibold border-b border-[#818cf8]/40">3D spatial graphics</span>, and{" "}
+                <span className="text-[#e879f9] font-semibold border-b border-[#e879f9]/40">autonomous agent systems</span>. Driven by rapid prototyping and zero-failure engineering.
+              </p>
+
+              {/* Action Buttons: Video-Derived Tactile Controls */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <button
+                  onClick={scrollToProjects}
+                  className="group relative inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 font-mono text-xs sm:text-sm font-black uppercase text-black bg-gradient-to-r from-[#00f0ff] to-[#38bdf8] hover:from-[#38bdf8] hover:to-[#e879f9] border border-white shadow-[0_0_15px_rgba(0,240,255,0.4)] hover:shadow-[0_0_20px_rgba(232,121,249,0.5)] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all duration-200 cursor-pointer overflow-hidden"
+                >
+                  <span className="relative z-10">View 3D Projects</span>
+                  <span className="relative z-10 text-sm font-black transition-transform duration-200 group-hover:translate-y-0.5">
+                    ↓
+                  </span>
+                  <div className="absolute inset-0 bg-white/30 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 pointer-events-none" />
+                </button>
+
+                <a
+                  href="#contactSection"
+                  className="group inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 font-mono text-xs sm:text-sm font-bold uppercase text-white bg-[#0f1433] hover:bg-white hover:text-black border-2 border-white/25 hover:border-[#00f0ff] shadow-[2px_2px_0px_0px_rgba(56,189,248,0.2)] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all duration-200"
+                >
+                  <span>Let's Connect</span>
+                  <span className="text-[#00f0ff] group-hover:text-black transition-colors">
+                    ✉
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            {/* Animated Cybernetic Circuit SVG with Video-Derived Hologram Palette */}
+            <div className="hidden lg:block relative w-[280px] h-[340px] xl:w-[320px] xl:h-[380px] p-3 bg-[#080c1f]/85 border-2 border-[#00f0ff]/30 shadow-[0_0_25px_rgba(0,240,255,0.2)] shrink-0 pointer-events-none select-none">
+              {/* HUD Corner Ticks */}
+              <div className="absolute top-1 left-1 font-mono text-[9px] text-[#00f0ff] font-bold">
+                [ SYSTEM // TELEMETRY ]
+              </div>
+              <div className="absolute top-1 right-1 font-mono text-[9px] text-white/40">
+                SYS::ACTIVE
+              </div>
+              <div className="absolute bottom-1 left-1 font-mono text-[9px] text-white/40">
+                SYS::SSB_2026
+              </div>
+              <div className="absolute bottom-1 right-1 font-mono text-[9px] text-[#e879f9] font-bold">
+                STATUS::ONLINE
+              </div>
+
+              <svg
+                className="w-full h-full pt-3"
+                viewBox="0 0 460 520"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <style>{`
+                  @keyframes flowTrack1 {
+                    0% { stroke-dashoffset: 48; }
+                    100% { stroke-dashoffset: 0; }
+                  }
+                  @keyframes flowTrack2 {
+                    0% { stroke-dashoffset: 0; }
+                    100% { stroke-dashoffset: 48; }
+                  }
+                  @keyframes rotateCoreRing {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+                  .flow-dash-1 {
+                    stroke-dasharray: 8 6;
+                    animation: flowTrack1 2.2s linear infinite;
+                  }
+                  .flow-dash-2 {
+                    stroke-dasharray: 10 7;
+                    animation: flowTrack2 2.8s linear infinite;
+                  }
+                  .flow-dash-3 {
+                    stroke-dasharray: 6 5;
+                    animation: flowTrack1 1.6s linear infinite;
+                  }
+                  .core-ring {
+                    transform-origin: 260px 250px;
+                    animation: rotateCoreRing 18s linear infinite;
+                  }
+                `}</style>
+
+                {/* Base Circuit Traces (Static Dim Grid) */}
+                <path
+                  d="M110 40 H280 L350 110 V220 L410 280 H440"
+                  stroke="rgba(56,189,248,0.2)"
+                  strokeWidth="2"
+                  strokeLinecap="square"
                 />
-              </g>
+                <path
+                  d="M30 180 H190 L260 250 H360 L410 300 V430"
+                  stroke="rgba(99,102,241,0.2)"
+                  strokeWidth="2"
+                  strokeLinecap="square"
+                />
+                <path
+                  d="M180 340 H290 L340 390 H430"
+                  stroke="rgba(232,121,249,0.2)"
+                  strokeWidth="2"
+                  strokeLinecap="square"
+                />
+                <path
+                  d="M260 80 V170 L220 210 H140"
+                  stroke="rgba(56,189,248,0.15)"
+                  strokeWidth="1.5"
+                  strokeLinecap="square"
+                />
+                <path
+                  d="M300 250 L350 300 H440"
+                  stroke="rgba(99,102,241,0.15)"
+                  strokeWidth="1.5"
+                  strokeLinecap="square"
+                />
 
-              {/* Core Chip Body */}
-              <rect
-                x="244"
-                y="234"
-                width="32"
-                height="32"
-                rx="8"
-                fill="#0a081a"
-                stroke="url(#circuit-grad1)"
-                strokeWidth="2"
-                filter="url(#core-glow)"
-              />
-              <text
-                x="260"
-                y="254"
-                textAnchor="middle"
-                fill="#67e8f9"
-                fontSize="10"
-                fontFamily="monospace"
-                fontWeight="bold"
-              >
-                SSB
-              </text>
+                {/* Animated Flowing Laser Energy Beams */}
+                <path
+                  d="M110 40 H280 L350 110 V220 L410 280 H440"
+                  stroke="url(#circuit-grad1)"
+                  strokeWidth="2.5"
+                  strokeLinecap="square"
+                  className="flow-dash-1"
+                />
+                <path
+                  d="M30 180 H190 L260 250 H360 L410 300 V430"
+                  stroke="url(#circuit-grad2)"
+                  strokeWidth="2.5"
+                  strokeLinecap="square"
+                  className="flow-dash-2"
+                />
+                <path
+                  d="M180 340 H290 L340 390 H430"
+                  stroke="url(#circuit-grad1)"
+                  strokeWidth="2.5"
+                  strokeLinecap="square"
+                  className="flow-dash-3"
+                />
+                <path
+                  d="M260 80 V170 L220 210 H140"
+                  stroke="url(#circuit-grad3)"
+                  strokeWidth="2"
+                  strokeLinecap="square"
+                  className="flow-dash-1"
+                />
 
-              {/* Pinging & Pulsing Junction Quantum Logic Nodes */}
-              <circle cx="280" cy="40" r="5" fill="#67e8f9" className="animate-ping" />
-              <circle cx="280" cy="40" r="3.5" fill="#ffffff" />
+                {/* Central Holographic Quantum Core (Replicating Frame 40 Celestial Orbital Ring) */}
+                <g className="core-ring">
+                  <circle
+                    cx="260"
+                    cy="250"
+                    r="24"
+                    stroke="url(#circuit-grad2)"
+                    strokeWidth="2.5"
+                    strokeDasharray="6 4"
+                    fill="none"
+                  />
+                  <ellipse
+                    cx="260"
+                    cy="250"
+                    rx="32"
+                    ry="14"
+                    stroke="#00f0ff"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 3"
+                    fill="none"
+                    transform="rotate(-25 260 250)"
+                  />
+                  <ellipse
+                    cx="260"
+                    cy="250"
+                    rx="32"
+                    ry="14"
+                    stroke="#e879f9"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 3"
+                    fill="none"
+                    transform="rotate(35 260 250)"
+                  />
+                </g>
 
-              <circle cx="350" cy="110" r="5" fill="#a7f3d0" className="animate-pulse" />
-              <circle cx="350" cy="110" r="3" fill="#a7f3d0" />
+                {/* Core Chip Body */}
+                <rect
+                  x="244"
+                  y="234"
+                  width="32"
+                  height="32"
+                  rx="0"
+                  fill="#060813"
+                  stroke="#00f0ff"
+                  strokeWidth="2"
+                />
+                <text
+                  x="260"
+                  y="254"
+                  textAnchor="middle"
+                  fill="#00f0ff"
+                  fontSize="10"
+                  fontFamily="monospace"
+                  fontWeight="900"
+                >
+                  SSB
+                </text>
 
-              <circle cx="190" cy="180" r="4.5" fill="#c4b5fd" className="animate-ping" style={{ animationDuration: "2s" }} />
-              <circle cx="190" cy="180" r="3" fill="#ffffff" />
+                {/* Pinging & Pulsing Junction Quantum Logic Nodes */}
+                <rect x="277" y="37" width="6" height="6" fill="#00f0ff" className="animate-pulse" />
+                <rect x="347" y="107" width="6" height="6" fill="#38bdf8" className="animate-pulse" />
+                <rect x="187" y="177" width="6" height="6" fill="#818cf8" className="animate-pulse" />
+                <rect x="407" y="277" width="6" height="6" fill="#00f0ff" className="animate-pulse" />
+                <rect x="337" y="387" width="6" height="6" fill="#e879f9" className="animate-pulse" />
 
-              <circle cx="410" cy="280" r="4" fill="#67e8f9" className="animate-pulse" />
-              <circle cx="410" cy="300" r="5" fill="#67e8f9" className="animate-ping" style={{ animationDuration: "2.6s" }} />
+                {/* Circuit Micro-Labels */}
+                <text x="110" y="30" fill="#00f0ff" fontSize="9" fontFamily="monospace" fontWeight="bold">
+                  CORE_BUS: 120FPS
+                </text>
+                <text x="350" y="420" fill="#e879f9" fontSize="9" fontFamily="monospace" fontWeight="bold">
+                  AI_NEURAL_LINK
+                </text>
 
-              <circle cx="340" cy="390" r="5" fill="#fda4af" className="animate-ping" style={{ animationDuration: "3.2s" }} />
-              <circle cx="340" cy="390" r="3" fill="#fda4af" />
-
-              <circle cx="140" cy="210" r="3.5" fill="#a7f3d0" className="animate-pulse" />
-
-              {/* Circuit Micro-Labels */}
-              <text x="110" y="30" fill="rgba(103,232,249,0.7)" fontSize="9" fontFamily="monospace" fontWeight="bold">
-                CORE_BUS: 120FPS
-              </text>
-              <text x="350" y="420" fill="rgba(167,243,208,0.7)" fontSize="9" fontFamily="monospace" fontWeight="bold">
-                AI_NEURAL_LINK
-              </text>
-
-              {/* Gradient Defs */}
-              <defs>
-                <linearGradient id="circuit-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#67e8f9" stopOpacity="0.95" />
-                  <stop offset="50%" stopColor="#c4b5fd" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#fda4af" stopOpacity="0.95" />
-                </linearGradient>
-                <linearGradient id="circuit-grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#a7f3d0" stopOpacity="0.95" />
-                  <stop offset="60%" stopColor="#67e8f9" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.95" />
-                </linearGradient>
-                <linearGradient id="circuit-grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#fda4af" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#c4b5fd" stopOpacity="0.9" />
-                </linearGradient>
-                <filter id="core-glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#67e8f9" floodOpacity="0.6" />
-                </filter>
-              </defs>
-            </svg>
+                {/* Video-Derived Holographic Gradient Defs */}
+                <defs>
+                  <linearGradient id="circuit-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#00f0ff" stopOpacity="0.95" />
+                    <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.95" />
+                    <stop offset="100%" stopColor="#818cf8" stopOpacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="circuit-grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#00f0ff" stopOpacity="0.95" />
+                    <stop offset="60%" stopColor="#818cf8" stopOpacity="0.95" />
+                    <stop offset="100%" stopColor="#e879f9" stopOpacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="circuit-grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#e879f9" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#818cf8" stopOpacity="0.9" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
           </div>
         </div>
 
-        {/* Real-Time Frame Sequencer Telemetry (Bottom Left) */}
-        <div className="absolute bottom-6 left-8 z-30 pointer-events-none flex items-center gap-3">
-          <div className="px-3 py-1 rounded-full bg-black/40 border border-white/10 backdrop-blur-md font-mono text-[11px] text-white/70 tracking-widest flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#67e8f9] animate-pulse" />
-            <span>FRAME <span ref={frameCounterRef}>01</span> / 40</span>
+        {/* Real-Time Frame Sequencer Telemetry (Bottom Left) - Technical Studio Readout */}
+        <div className="absolute bottom-4 left-4 sm:left-8 z-30 pointer-events-none flex items-center gap-3">
+          <div className="px-3 py-1 sm:px-3.5 sm:py-1.5 bg-[#080c1f]/90 border border-[#00f0ff]/30 font-mono text-[10px] sm:text-[11px] text-white/90 tracking-widest flex items-center gap-2 shadow-[0_0_10px_rgba(0,240,255,0.2)]">
+            <span className="w-1.5 h-1.5 bg-[#00f0ff] animate-ping" />
+            <span>SEQ // FRAME <span ref={frameCounterRef} className="text-[#00f0ff] font-black">01</span> / 40</span>
           </div>
         </div>
 
-        {/* Scroll Guide Beacon (Bottom Center) - Hidden on mobile for clean screen hierarchy */}
-        <div className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-1.5 pointer-events-none opacity-60">
-          <span className="font-mono text-[10px] tracking-widest uppercase text-white/70">
-            Scroll to Navigate
-          </span>
-          <span className="w-1 h-3 rounded-full bg-white/50 animate-bounce" />
+        {/* Scroll Guide Beacon (Bottom Center) - Industrial Benchmark Stamp */}
+        <div className="hidden sm:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-30 items-center gap-2 px-3 py-1 bg-[#080c1f]/85 border border-white/15 pointer-events-none opacity-80 font-mono text-[9px] sm:text-[10px] tracking-widest uppercase text-white/70">
+          <span>Scroll to Navigate</span>
+          <span className="text-[#00f0ff] font-bold animate-bounce">↓</span>
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Syne, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,8 +12,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
+
 export const viewport: Viewport = {
-  themeColor: "#05040a",
+  themeColor: "#060813",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -68,9 +85,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
+      className={`${syne.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${geistSans.variable} ${geistMono.variable} scroll-smooth`}
     >
-      <body className="min-h-full bg-[#05040a] text-white antialiased selection:bg-[#67e8f9] selection:text-black">
+      <body className="min-h-full bg-[#060813] text-[#f5f5f7] font-sans antialiased selection:bg-[#00f0ff] selection:text-black">
         {children}
       </body>
     </html>

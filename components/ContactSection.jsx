@@ -31,107 +31,159 @@ export default function ContactSection() {
   return (
     <section
       id="contactSection"
-      className="relative w-full min-h-screen py-28 px-6 bg-[#05040a] text-white flex flex-col items-center justify-center overflow-hidden border-t border-white/10"
+      className="relative w-full min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-12 bg-[#060813] text-[#f5f5f7] flex flex-col items-center justify-center overflow-hidden border-t border-white/20"
       aria-label="Contact and Socials"
     >
-      {/* Aurora Ambient Lighting */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
-        <div className="absolute -top-[20%] left-[10%] w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-[#c4b5fd] to-[#67e8f9] blur-[140px] animate-pulse" />
-        <div className="absolute -bottom-[20%] right-[10%] w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-[#fda4af] to-[#a7f3d0] blur-[140px] animate-pulse" />
+      {/* Background Architectural Canvas Grid & Registration Crosshairs */}
+      <div className="absolute inset-0 bg-grid-architectural opacity-25 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00f0ff] via-[#818cf8] to-[#e879f9]" />
+
+      {/* Crosshair Markers */}
+      <span className="absolute top-6 left-6 font-mono text-[10px] text-white/30 tracking-widest pointer-events-none select-none">
+        + COMM_STATION // CHENNAI_NODE
+      </span>
+      <span className="absolute top-6 right-6 font-mono text-[10px] text-white/30 tracking-widest pointer-events-none select-none">
+        LAT 13.0827° N / LONG 80.2707° E +
+      </span>
+      <span className="absolute bottom-6 left-6 font-mono text-[10px] text-white/30 tracking-widest pointer-events-none select-none">
+        + STATUS: TRANSMISSION_READY
+      </span>
+      <span className="absolute bottom-6 right-6 font-mono text-[10px] text-white/30 tracking-widest pointer-events-none select-none">
+        SECURITY: VERIFIED_SSL +
+      </span>
+
+      {/* Massive Background Typography Watermark */}
+      <div
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 font-syne font-black text-[12vw] text-white/[0.018] tracking-tighter uppercase whitespace-nowrap pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        COMMUNICATIONS
       </div>
 
-      {/* Header */}
-      <div className="relative z-10 text-center max-w-2xl mb-16">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#fda4af]/10 border border-[#fda4af]/25 text-[#fda4af] font-mono text-xs font-bold uppercase mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#fda4af] shadow-[0_0_10px_#fda4af]" />
-          GET IN TOUCH • COLLABORATIONS & ROLES
+      {/* Section Header */}
+      <div className="relative z-10 w-full max-w-6xl mb-10 sm:mb-14">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/15">
+          <div className="inline-flex items-center gap-3 px-3 py-1 bg-white/5 border border-[#e879f9]/40 font-mono text-xs font-bold text-[#e879f9] uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-none bg-[#e879f9] shadow-[0_0_8px_#e879f9]" />
+            GET IN TOUCH • COLLABORATIONS & ROLES
+          </div>
+          <div className="font-mono text-xs text-white/40 tracking-widest uppercase">
+            [ DIRECT PROTOCOL · CHENNAI_NODE ]
+          </div>
         </div>
-        <h2 className="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-[#c4b5fd] to-[#67e8f9] bg-clip-text text-transparent mb-4">
-          LET'S BUILD TOGETHER
-        </h2>
-        <p className="text-white/70 text-base sm:text-lg">
-          Have an exciting project, full-time engineering role, or research collaboration? Drop a line or connect across direct channels.
-        </p>
+
+        <div className="mt-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <span className="font-mono text-xs text-[#00f0ff] uppercase tracking-widest block mb-2">
+              DISPATCH & SYNCHRONIZATION
+            </span>
+            <h2 className="font-syne text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-none">
+              LET'S BUILD <span className="text-[#00f0ff] underline decoration-[#e879f9] decoration-4 underline-offset-8">TOGETHER</span>
+            </h2>
+          </div>
+          <p className="font-sans text-white/70 text-xs sm:text-sm md:text-base max-w-md leading-relaxed border-l-2 border-[#00f0ff] pl-4">
+            Have an exciting project, full-time engineering role, or research collaboration? Drop a line or connect across direct channels.
+          </p>
+        </div>
       </div>
 
       {/* Contact Grid */}
-      <div className="relative z-10 w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Direct Info Card */}
-        <div className="lg:col-span-5 p-8 rounded-3xl bg-[rgba(15,12,28,0.7)] border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col gap-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#a7f3d0]/10 border border-[#a7f3d0]/30 text-[#a7f3d0] font-mono text-xs font-bold w-fit">
-            <span className="w-2 h-2 rounded-full bg-[#a7f3d0] animate-ping" />
-            AVAILABLE FOR FULL-TIME ROLES
+      <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Column: Direct Info Card Dossier */}
+        <div className="lg:col-span-5 p-6 sm:p-8 bg-[#080c1f] border-2 border-white/20 shadow-[8px_8px_0_0_rgba(0,240,255,0.15)] flex flex-col gap-6 relative">
+          {/* Architectural Registration Accents */}
+          <span className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#00f0ff]" />
+          <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#e879f9]" />
+
+          <div className="flex items-center justify-between pb-4 border-b border-white/10">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#00f0ff]/10 border border-[#00f0ff]/40 text-[#00f0ff] font-mono text-[11px] font-bold uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 bg-[#00f0ff] animate-ping" />
+              AVAILABLE FOR FULL-TIME ROLES
+            </div>
+            <span className="font-mono text-[10px] text-white/40 uppercase">STATUS: ACTIVE</span>
           </div>
 
           <div>
-            <h3 className="text-2xl font-black text-white">Syed Sabirudeen B</h3>
-            <p className="text-white/65 text-sm mt-2 leading-relaxed">
+            <span className="font-mono text-[10px] text-white/40 tracking-widest uppercase block mb-1">
+              ENGINEER DOSSIER // CHENNAI_HQ
+            </span>
+            <h3 className="font-syne text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
+              Syed Sabirudeen B
+            </h3>
+            <p className="font-sans text-white/70 text-xs sm:text-sm mt-3 leading-relaxed border-l border-white/20 pl-3">
               Mobile and Web App Developer specializing in Flutter, Firebase, Full-Stack MERN platforms, and Google Gemini AI integration.
             </p>
           </div>
 
+          {/* Contact Methods Ledger */}
           <div className="flex flex-col gap-3">
             {/* Email Block */}
-            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#67e8f9]/10 border border-[#67e8f9]/20 flex items-center justify-center text-[#67e8f9]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <polyline points="22,6 12,13 2,6" />
-                  </svg>
+            <div className="p-4 bg-white/[0.03] border border-white/15 hover:border-[#00f0ff] transition-all">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-[#00f0ff] font-mono text-sm font-bold shrink-0">
+                    ✉
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="font-mono text-[10px] uppercase text-white/50 tracking-wider">Direct Email</span>
+                    <a
+                      href="mailto:sabirudeensyed@gmail.com"
+                      className="font-mono text-xs sm:text-sm font-bold text-white hover:text-[#00f0ff] transition-colors truncate"
+                    >
+                      sabirudeensyed@gmail.com
+                    </a>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-mono text-[10px] uppercase text-white/50">Direct Email</span>
-                  <a href="mailto:sabirudeensyed@gmail.com" className="font-sans text-xs sm:text-sm font-semibold text-white hover:text-[#67e8f9] transition-colors">
-                    sabirudeensyed@gmail.com
-                  </a>
-                </div>
+                <button
+                  onClick={handleCopyEmail}
+                  className="px-3 py-1.5 font-mono text-[11px] font-bold uppercase text-white bg-white/10 hover:bg-[#00f0ff] hover:text-black border border-white/20 transition-all cursor-pointer shrink-0"
+                >
+                  {copied ? "Copied! ✓" : "Copy"}
+                </button>
               </div>
-              <button
-                onClick={handleCopyEmail}
-                className="px-3 py-1.5 rounded-full font-mono text-xs font-bold text-white bg-white/10 hover:bg-[#67e8f9] hover:text-black border border-white/15 transition-all cursor-pointer"
-              >
-                {copied ? "Copied! ✓" : "Copy"}
-              </button>
             </div>
 
             {/* Phone Block */}
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#a7f3d0]/10 border border-[#a7f3d0]/20 flex items-center justify-center text-[#a7f3d0]">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-mono text-[10px] uppercase text-white/50">Phone / WhatsApp</span>
-                <a href="tel:+917358578018" className="font-sans text-xs sm:text-sm font-semibold text-white hover:text-[#a7f3d0] transition-colors">
-                  +91 7358578018
-                </a>
+            <div className="p-4 bg-white/[0.03] border border-white/15 hover:border-[#00f0ff] transition-all">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center text-[#00f0ff] font-mono text-sm font-bold shrink-0">
+                  ☎
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-mono text-[10px] uppercase text-white/50 tracking-wider">Phone / WhatsApp</span>
+                  <a
+                    href="tel:+917358578018"
+                    className="font-mono text-xs sm:text-sm font-bold text-white hover:text-[#00f0ff] transition-colors"
+                  >
+                    +91 7358578018
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Location Block */}
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10">
-              <div className="w-10 h-10 rounded-xl bg-[#c4b5fd]/10 border border-[#c4b5fd]/20 flex items-center justify-center text-[#c4b5fd]">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-mono text-[10px] uppercase text-white/50">Location</span>
-                <span className="font-sans text-xs sm:text-sm font-semibold text-white">Chennai, India • Remote / Relocation</span>
+            <div className="p-4 bg-white/[0.03] border border-white/15 hover:border-[#818cf8] transition-all">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#818cf8]/10 border border-[#818cf8]/30 flex items-center justify-center text-[#818cf8] font-mono text-sm font-bold shrink-0">
+                  ⌖
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-mono text-[10px] uppercase text-white/50 tracking-wider">Location</span>
+                  <span className="font-mono text-xs sm:text-sm font-bold text-white">
+                    Chennai, India • Remote / Relocation
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Social Links & Resume */}
-          <div className="flex flex-wrap gap-2.5 pt-2">
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-white/10">
             <a
               href="https://github.com/sabir2006-10"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-[#67e8f9]/50 text-xs font-semibold text-white transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 px-3.5 py-2 bg-white/5 hover:bg-[#00f0ff] hover:text-black border border-white/20 text-xs font-mono font-bold text-white transition-all uppercase"
             >
               <span>GitHub</span>
               <span>↗</span>
@@ -140,7 +192,7 @@ export default function ContactSection() {
               href="https://www.linkedin.com/in/syed-sabirudeen-8081a42b0"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-[#c4b5fd]/50 text-xs font-semibold text-white transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 px-3.5 py-2 bg-white/5 hover:bg-[#818cf8] hover:text-black border border-white/20 text-xs font-mono font-bold text-white transition-all uppercase"
             >
               <span>LinkedIn</span>
               <span>↗</span>
@@ -150,7 +202,7 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               download="Syed_Sabirudeen_B_Resume.pdf"
-              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#a7f3d0]/20 via-[#67e8f9]/20 to-[#c4b5fd]/20 hover:from-[#a7f3d0]/35 hover:to-[#c4b5fd]/35 border border-[#67e8f9]/50 hover:border-[#67e8f9] text-xs font-bold text-[#67e8f9] transition-all hover:scale-105 shadow-[0_0_15px_rgba(103,232,249,0.25)]"
+              className="group inline-flex items-center gap-2 px-4 py-2 bg-[#e879f9]/15 hover:bg-[#e879f9] hover:text-black border border-[#e879f9]/60 text-xs font-mono font-bold text-[#e879f9] transition-all uppercase shadow-[0_0_15px_rgba(232,121,249,0.25)]"
             >
               <span>Download Resume (PDF)</span>
               <span className="transition-transform group-hover:translate-y-0.5">↓</span>
@@ -158,74 +210,100 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* Right Column: Contact Form Card */}
-        <div className="lg:col-span-7 p-8 rounded-3xl bg-[rgba(15,12,28,0.7)] border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+        {/* Right Column: Contact Form Terminal */}
+        <div className="lg:col-span-7 p-6 sm:p-8 bg-[#080c1f] border-2 border-white/20 shadow-[8px_8px_0_0_rgba(232,121,249,0.15)] relative">
+          {/* Header Bar */}
+          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 bg-[#e879f9]" />
+              <span className="w-2.5 h-2.5 bg-[#fbbf24]" />
+              <span className="w-2.5 h-2.5 bg-[#00f0ff]" />
+              <span className="font-mono text-xs font-bold text-white tracking-wider ml-2 uppercase">
+                DIRECT_TRANSMISSION_INTERFACE
+              </span>
+            </div>
+            <span className="font-mono text-[10px] text-white/40 uppercase">ENCRYPTED // TLS 1.3</span>
+          </div>
+
           {formSubmitted ? (
-            <div className="py-16 flex flex-col items-center justify-center text-center gap-3">
-              <span className="w-14 h-14 rounded-full bg-[#a7f3d0]/20 border border-[#a7f3d0] flex items-center justify-center text-[#a7f3d0] text-2xl">
+            <div className="py-16 flex flex-col items-center justify-center text-center gap-4 border-2 border-dashed border-[#00f0ff]/40 p-8 bg-[#00f0ff]/5">
+              <span className="w-16 h-16 bg-[#00f0ff] text-black font-syne font-black text-3xl flex items-center justify-center">
                 ✓
               </span>
-              <h4 className="text-2xl font-bold text-white">Message Transmitted!</h4>
-              <p className="text-white/70 max-w-md text-sm">
+              <h4 className="font-syne text-3xl font-extrabold text-white uppercase tracking-tight">
+                Message Transmitted!
+              </h4>
+              <p className="font-sans text-white/70 max-w-md text-sm leading-relaxed">
                 Thank you for getting in touch. I will review your note and respond promptly.
               </p>
+              <div className="font-mono text-[11px] text-[#00f0ff] bg-black/60 px-4 py-2 border border-[#00f0ff]/30 mt-2">
+                TRANSMISSION CONFIRMED · STATUS 200 OK
+              </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
-                  <label className="font-mono text-xs font-semibold text-white/80">Your Name *</label>
+                  <label className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                    Your Name *
+                  </label>
                   <input
                     type="text"
                     required
                     placeholder="Alex Morgan"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 focus:border-[#67e8f9] focus:outline-none focus:ring-1 focus:ring-[#67e8f9] text-white placeholder-white/30 text-sm transition-all"
+                    className="w-full px-4 py-3 bg-[#060813] border border-white/20 focus:border-[#00f0ff] focus:bg-[#00f0ff]/5 focus:outline-none text-white placeholder-white/25 font-sans text-sm transition-all"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="font-mono text-xs font-semibold text-white/80">Email Address *</label>
+                  <label className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                    Email Address *
+                  </label>
                   <input
                     type="email"
                     required
                     placeholder="alex@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 focus:border-[#67e8f9] focus:outline-none focus:ring-1 focus:ring-[#67e8f9] text-white placeholder-white/30 text-sm transition-all"
+                    className="w-full px-4 py-3 bg-[#060813] border border-white/20 focus:border-[#00f0ff] focus:bg-[#00f0ff]/5 focus:outline-none text-white placeholder-white/25 font-sans text-sm transition-all"
                   />
                 </div>
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-mono text-xs font-semibold text-white/80">Subject</label>
+                <label className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                  Subject
+                </label>
                 <input
                   type="text"
                   placeholder="Project Inquiry / Job Opportunity"
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 focus:border-[#67e8f9] focus:outline-none focus:ring-1 focus:ring-[#67e8f9] text-white placeholder-white/30 text-sm transition-all"
+                  className="w-full px-4 py-3 bg-[#060813] border border-white/20 focus:border-[#818cf8] focus:bg-[#818cf8]/5 focus:outline-none text-white placeholder-white/25 font-sans text-sm transition-all"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-mono text-xs font-semibold text-white/80">Message *</label>
+                <label className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                  Message *
+                </label>
                 <textarea
                   required
                   rows={4}
                   placeholder="Tell me about your project, timeline, or engineering role..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 focus:border-[#67e8f9] focus:outline-none focus:ring-1 focus:ring-[#67e8f9] text-white placeholder-white/30 text-sm transition-all resize-none"
+                  className="w-full px-4 py-3 bg-[#060813] border border-white/20 focus:border-[#e879f9] focus:bg-[#e879f9]/5 focus:outline-none text-white placeholder-white/25 font-sans text-sm transition-all resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="mt-2 inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-2xl font-sans text-sm font-bold text-black bg-gradient-to-r from-[#a7f3d0] via-[#67e8f9] to-[#c4b5fd] hover:shadow-[0_0_25px_rgba(103,232,249,0.5)] transition-all duration-300 hover:scale-[1.01]"
+                className="group relative inline-flex items-center justify-center gap-3 w-full py-4 px-6 font-syne text-sm font-extrabold uppercase tracking-wider text-black bg-[#00f0ff] hover:bg-[#e879f9] border-2 border-black transition-all duration-200 cursor-pointer shadow-[4px_4px_0_0_#ffffff] hover:shadow-[2px_2px_0_0_#ffffff] active:translate-x-0.5 active:translate-y-0.5"
               >
                 <span>Send Message</span>
-                <span>→</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
               </button>
             </form>
           )}

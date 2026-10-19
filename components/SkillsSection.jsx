@@ -33,7 +33,7 @@ export const competencyStoriesData = [
         "Native dialog, form validation, and responsive picture/srcset asset pipelines",
         "Zero Cumulative Layout Shift (CLS) through aspect-ratio bounding reservations"
       ],
-      bannerEyebrow: "Semantic Web Standards ......................... 100/100 Accessibility",
+      bannerEyebrow: "Semantic Web Standards · 100/100 Accessibility",
       bannerHeading: "Accessible By Design: Clean Semantic Hierarchies Built For Humans & Search Engines",
       bannerBadges: ["W3C Valid", "WCAG 2.1", "SEO Microdata", "A11y Verified"],
       bannerBody: "Semantic markup guarantees that regardless of assistive technology, device viewport, or network conditions, content remains structured, legible, and immediately discoverable.",
@@ -68,7 +68,7 @@ export const competencyStoriesData = [
         "Automated AST type checking in GitHub Actions CI pipelines",
         "End-to-end contract synchronization between backend API responses and front-end states"
       ],
-      bannerEyebrow: "Strict Typing Architecture ......................... Zero Runtime Regressions",
+      bannerEyebrow: "Strict Typing Architecture · Zero Runtime Regressions",
       bannerHeading: "End-to-End Type Safety: From Database Schemas to WebGL Vertex Buffers",
       bannerBadges: ["TypeScript 5.x", "Zod", "No Implicit Any", "Type-Driven"],
       bannerBody: "Every interactive component, API response, and audio oscillator event is strictly typed, eliminating edge-case runtime crashes across the entire portfolio lifecycle.",
@@ -103,7 +103,7 @@ export const competencyStoriesData = [
         "React Server Actions for secure direct mutations without boilerplate API handlers",
         "Next/Font and Next/Image automatic optimization eliminating visual shifts"
       ],
-      bannerEyebrow: "Next.js 16 Architecture ......................... React 19 Server Components",
+      bannerEyebrow: "Next.js 16 Architecture · React 19 Server Components",
       bannerHeading: "Sub-Second Global TTFB with Partial Prerendering and Parallelized Hydration",
       bannerBadges: ["Turbopack", "App Router", "Edge Cache", "Next 16"],
       bannerBody: "The unified portfolio runs on Next.js 16, rendering 40-frame interactive canvas heroes, 3D scroll orbits, and Web Audio synthesizers in a single high-performance bundle.",
@@ -138,7 +138,7 @@ export const competencyStoriesData = [
         "Asset preloading for 40-frame interactive canvas hero sequences",
         "Clean functional hook compositions maintaining single sources of truth"
       ],
-      bannerEyebrow: "Concurrent React 19 ......................... 60 FPS Fluid Scheduling",
+      bannerEyebrow: "Concurrent React 19 · 60 FPS Fluid Scheduling",
       bannerHeading: "Declarative Reactivity with Hardware-Accelerated Micro-Interactions",
       bannerBadges: ["React 19", "Concurrent", "useOptimistic", "Fiber Engine"],
       bannerBody: "Leveraging React 19 enables our application to coordinate complex continuous marquees, 3D orbits, and synthesized audio streams concurrently without UI blocking.",
@@ -173,7 +173,7 @@ export const competencyStoriesData = [
         "Fluid typography and layout scaling using modern CSS clamp() functions",
         "Minimal atomic CSS bundle size with purge optimization"
       ],
-      bannerEyebrow: "Design Engineering ......................... Hardware Accelerated",
+      bannerEyebrow: "Design Engineering · Hardware Accelerated",
       bannerHeading: "Curated Pastel Glassmorphism with Micro-Interactions & GPU Compositing",
       bannerBadges: ["Tailwind v4", "Zero Runtime", "Pastel Palette", "GPU Layers"],
       bannerBody: "Atomic styling guarantees instant load speeds, zero styling flashes, and complete aesthetic coherence across every component in the portfolio.",
@@ -208,7 +208,7 @@ export const competencyStoriesData = [
         "Interactive mouse parallax tilt tracking and smooth LERP momentum easing",
         "Dynamic canvas resizing with retina display devicePixelRatio compensation"
       ],
-      bannerEyebrow: "Spatial WebGL & 3D ......................... Instanced Particle Math",
+      bannerEyebrow: "Spatial WebGL & 3D · Instanced Particle Math",
       bannerHeading: "Procedural Particle Nebulas & 3D Perspective Orchestration on the Web",
       bannerBadges: ["GLSL", "Three.js", "Canvas 2D", "Math Physics"],
       bannerBody: "WebGL mathematics and GPU compositing empower the portfolio's 3D project showcase, spine ribbon canvas, and hero video sequencer.",
@@ -243,7 +243,7 @@ export const competencyStoriesData = [
         "Automated video processing: lossless frame slicing, compression, and analysis",
         "Vector embeddings, neural search indexing, and retrieval-augmented pipelines"
       ],
-      bannerEyebrow: "AI & Neural Systems ......................... Sub-180ms Inference",
+      bannerEyebrow: "AI & Neural Systems · Sub-180ms Inference",
       bannerHeading: "Autonomous Multimodal Pipelines: Bridging Foundation Models To Web Apps",
       bannerBadges: ["FastAPI", "Gemini API", "OpenCV", "PyTorch"],
       bannerBody: "High-throughput Python backends power complex AI inference, intelligent automation, and asset extraction with high efficiency.",
@@ -278,7 +278,7 @@ export const competencyStoriesData = [
         "JWT authentication, rate-limiting middleware, and CORS security hardening",
         "Dockerized microservice deployment with graceful shutdown listeners"
       ],
-      bannerEyebrow: "Real-time Node.js ......................... Sub-8ms Event Loop",
+      bannerEyebrow: "Real-time Node.js · Sub-8ms Event Loop",
       bannerHeading: "High-Concurrency WebSocket Pipelines for Real-Time Collaborative Web",
       bannerBadges: ["Node.js", "WebSockets", "Express", "Microservices"],
       bannerBody: "Node.js powers server-side middleware, asset orchestration, and real-time streaming feeds with robust fault tolerance.",
@@ -313,7 +313,7 @@ export const competencyStoriesData = [
         "Global edge deployments with instant rollback capability",
         "Environment secret isolation adhering to 12-factor application standards"
       ],
-      bannerEyebrow: "Cloud & Containerization ......................... Zero Downtime Releases",
+      bannerEyebrow: "Cloud & Containerization · Zero Downtime Releases",
       bannerHeading: "Hermetic Multi-Stage Containers Backed by Automated CI/CD Pipelines",
       bannerBadges: ["Docker", "GitHub Actions", "CI/CD", "Edge Deploy"],
       bannerBody: "Cloud containerization ensures that development, staging, and production environments behave with absolute uniformity.",
@@ -348,7 +348,7 @@ export const competencyStoriesData = [
         "Connection pooling (PgBouncer) for seamless serverless cold-start resilience",
         "Automated migration pipelines integrated directly into continuous deployment"
       ],
-      bannerEyebrow: "Database Engineering ......................... Sub-2ms Query Latency",
+      bannerEyebrow: "Database Engineering · Sub-2ms Query Latency",
       bannerHeading: "ACID-Compliant Relational Schemas Tuned For High-Throughput Analytics",
       bannerBadges: ["Postgres 16", "Prisma", "Drizzle", "SQL Indexing"],
       bannerBody: "Reliable database schemas ensure transactions, user inputs, and project metadata are stored securely and queried with lightning speed.",
@@ -385,7 +385,7 @@ export const competencyStoriesData = [
         "Dynamic properties of code visual layout introducing the Jev System One model",
         "Componentized design system allowing independent non-technical updates"
       ],
-      bannerEyebrow: "Introducing Jev ......................... Intelligence beyond chat",
+      bannerEyebrow: "Introducing Jev · Intelligence Beyond Chat",
       bannerHeading: "The First (Public) System One Model; Jev Gives AI The Properties Of Code",
       bannerBadges: ["AI", "11-50", "2024", "40M", "Seed"],
       bannerBody: "After two years in stealth, TypeSafe AI needed a site to introduce Jev, an AI model that helps software make decisions with a measure of confidence. With help from agency Fuzzco, the team built it in Framer, giving Jev a distinct visual introduction and TypeSafe a site it could update independently after launch.",
@@ -420,7 +420,7 @@ export const competencyStoriesData = [
         "Edge-cached query deduplication reducing redundant inference costs by 48%",
         "Minimalist keyboard-first interface optimized for instant exploratory workflows"
       ],
-      bannerEyebrow: "Real-Time Neural Web Indexing ......................... Latency Under 250ms",
+      bannerEyebrow: "Real-Time Neural Web Indexing · Latency Under 250ms",
       bannerHeading: "Autonomous Retrieval Augmented Search with End-to-End Triton Cluster Pipelines",
       bannerBadges: ["Search", "LLM", "2024", "Unicorn", "Series B"],
       bannerBody: "Processing tens of millions of complex queries daily, the architecture delivers instant, factual summaries with direct source verification.",
@@ -456,7 +456,7 @@ export const competencyStoriesData = [
         "Zero-CLS layout stability across desktop, tablet, and mobile breakpoints",
         "Micro-animation design standards improving user engagement metrics by 38%"
       ],
-      bannerEyebrow: "Modular System Architecture ......................... 10M Active Users",
+      bannerEyebrow: "Modular System Architecture · 10M Active Users",
       bannerHeading: "Distributed Next.js Edge Caching & Scalable Component Frameworks",
       bannerBadges: ["Design System", "Enterprise", "Framer", "Scale"],
       bannerBody: "Empowering millions of daily enterprise interactions, the unified platform ensures visual consistency and sub-second load times worldwide.",
@@ -491,7 +491,7 @@ export const competencyStoriesData = [
         "Zero-drop event buffer queues guaranteeing data consistency during peak bursts",
         "Interactive conversion funnel visualizations rendered with hardware acceleration"
       ],
-      bannerEyebrow: "Event Stream Pipeline ......................... 1.2B Monthly Events",
+      bannerEyebrow: "Event Stream Pipeline · 1.2B Monthly Events",
       bannerHeading: "Fault-Tolerant Distributed Kafka Architecture & Real-Time Aggregation",
       bannerBadges: ["Analytics", "Big Data", "Kafka", "Product Intel"],
       bannerBody: "Processing massive real-time data streams without dropping a single event, the telemetry engine enables deep behavioral product insights.",
@@ -526,7 +526,7 @@ export const competencyStoriesData = [
         "Resilient retry mechanisms with exponential backoff for third-party API rate limits",
         "Zero-code visual orchestration canvas paired with extensible developer webhooks"
       ],
-      bannerEyebrow: "Intelligent Orchestration ......................... 6,000+ App Connectors",
+      bannerEyebrow: "Intelligent Orchestration · 6,000+ App Connectors",
       bannerHeading: "Asynchronous Event-Driven Webhook Automation Engine",
       bannerBadges: ["Automation", "6k+ APIs", "AI Agents", "Workflows"],
       bannerBody: "Orchestrating hundreds of thousands of automated business logic tasks each month, the platform removes repetitive friction across organizations.",
@@ -577,35 +577,41 @@ export default function SkillsSection() {
   return (
     <section
       id="skillsSection"
-      className="relative w-full py-16 sm:py-24 px-3 sm:px-6 bg-[#080614] text-white flex flex-col items-center border-t border-white/10 overflow-hidden z-20"
+      className="relative w-full py-20 sm:py-28 px-3 sm:px-6 bg-[#060813] text-white flex flex-col items-center border-t border-white/10 overflow-hidden z-20"
       aria-label="Technical Tooling and Competencies Showcase"
     >
-      {/* Ambient Lighting & Glow */}
+      {/* Background Architectural Grid & Video-Derived Ambient Aura */}
+      <div className="absolute inset-0 bg-grid-architectural opacity-30 pointer-events-none z-0" />
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] h-[50vh] bg-[radial-gradient(ellipse_at_center,rgba(103,232,249,0.08)_0%,rgba(196,181,253,0.08)_35%,rgba(167,243,208,0.04)_70%,transparent_80%)] blur-[90px] pointer-events-none z-[1]"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[1200px] h-[50vh] bg-[radial-gradient(ellipse_at_center,rgba(0,240,255,0.08)_0%,rgba(99,102,241,0.06)_40%,rgba(232,121,249,0.04)_70%,transparent_80%)] blur-[90px] pointer-events-none z-[1]"
         aria-hidden="true"
       />
 
-      {/* Header */}
-      <div className="text-center max-w-3xl mb-10 sm:mb-12 relative z-10 px-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(167,243,208,0.08)] border border-[rgba(167,243,208,0.28)] mb-2.5 backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#a7f3d0] shadow-[0_0_8px_#a7f3d0] animate-pulse" />
-          <span className="font-mono text-[11px] font-bold text-[#a7f3d0] tracking-wider uppercase">
+      {/* Header - Industrial Engineering Manifest */}
+      <div className="text-center max-w-3xl mb-10 sm:mb-14 relative z-10 px-2">
+        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-[#080c1f]/95 border border-[#00f0ff]/60 mb-2.5 shadow-[2px_2px_0px_0px_#00f0ff]">
+          <span className="w-2 h-2 rounded-none bg-[#00f0ff] animate-pulse" />
+          <span className="font-mono text-[11px] font-black text-[#00f0ff] tracking-widest uppercase">
             TECHNICAL TOOLING & COMPETENCIES
           </span>
+          <span className="text-white/40">//</span>
+          <span className="font-mono text-[10px] text-white/60">SYS::VERIFIED</span>
         </div>
 
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight bg-gradient-to-r from-white via-[#67e8f9] to-[#c4b5fd] bg-clip-text text-transparent mb-3">
+        <h2
+          style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+          className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white uppercase mb-3 drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)]"
+        >
           CAPABILITIES & CLIENT INSIGHTS
         </h2>
 
-        <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto leading-relaxed">
+        <p className="font-sans text-xs sm:text-sm md:text-base text-white/75 max-w-xl mx-auto leading-relaxed">
           Infinite motion competencies stream. Hover any card to illuminate its visual backdrop; click{" "}
-          <span className="text-[#67e8f9] font-mono font-bold">Read insight →</span> to explore architectural metrics and execution details.
+          <span className="text-[#00f0ff] font-mono font-bold border-b border-[#00f0ff]/50">Read insight →</span> to explore architectural metrics and execution details.
         </p>
 
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 mt-6 p-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md max-w-xl mx-auto">
+        {/* Category Filter Pills - Industrial Mechanical Deck */}
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-6 p-1.5 bg-[#080c1f]/90 border border-white/15 max-w-2xl mx-auto shadow-[4px_4px_0px_0px_rgba(0,240,255,0.1)]">
           {[
             { id: "all", label: "All Tooling & Stories" },
             { id: "languages", label: "Languages" },
@@ -617,10 +623,10 @@ export default function SkillsSection() {
             <button
               key={tab.id}
               onClick={() => setActiveCategory(tab.id)}
-              className={`px-3 py-1.5 rounded-full font-mono text-[11px] font-bold transition-all duration-200 ${
+              className={`px-3 sm:px-3.5 py-1.5 font-mono text-[11px] font-black uppercase transition-all duration-150 cursor-pointer ${
                 activeCategory === tab.id
-                  ? "bg-[#67e8f9] text-black shadow-[0_0_12px_rgba(103,232,249,0.35)]"
-                  : "text-white/60 hover:text-white hover:bg-white/5"
+                  ? "bg-[#00f0ff] text-black shadow-[2px_2px_0px_0px_#e879f9]"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
               }`}
             >
               {tab.label}
@@ -630,49 +636,37 @@ export default function SkillsSection() {
       </div>
 
       {/* CONTINUOUS MOTION MARQUEE - TRACK 1 (MOVING LEFT) */}
-      <div className="relative w-full max-w-[100vw] overflow-hidden py-2.5 z-10 [mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)]">
-        <div className="animate-marquee-left flex gap-4 sm:gap-5 px-3">
+      <div className="relative w-full max-w-[100vw] overflow-hidden py-3 z-10 [mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)]">
+        <div className="animate-marquee-left flex gap-4 sm:gap-6 px-3">
           {marqueeRow1.map((item, idx) => (
             <article
               key={`${item.id}-r1-${idx}`}
               onClick={() => setActiveStory(item)}
-              style={{
-                boxShadow: "0 20px 45px -12px rgba(0,0,0,0.85)"
-              }}
-              className="group relative w-[230px] sm:w-[255px] h-[255px] sm:h-[275px] rounded-[22px] bg-[rgba(10,8,22,0.85)] border border-white/12 overflow-hidden flex flex-col justify-between p-4.5 sm:p-5.5 cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:border-white/35 flex-shrink-0 select-none will-change-transform"
+              className="group relative w-[240px] sm:w-[270px] h-[260px] sm:h-[285px] bg-[#0b0f24] border border-white/20 hover:border-[#00f0ff] overflow-hidden flex flex-col justify-between p-5 cursor-pointer transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#00f0ff] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] flex-shrink-0 select-none will-change-transform"
             >
-              {/* Hover Backdrop Reveal (Exact Reference Video Effect) */}
+              {/* Hover Backdrop Reveal */}
               <div
-                className={`absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-100 group-hover:scale-105 pointer-events-none ${item.bgClass}`}
+                className={`absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-100 group-hover:scale-105 pointer-events-none ${item.bgClass}`}
               />
 
-              {/* Iridescent Border Rim Overlay on Hover */}
-              <div
-                style={{
-                  boxShadow: `inset 0 0 0 1px ${item.accent}30, 0 0 25px ${item.glowColor}`
-                }}
-                className="absolute inset-0 rounded-[22px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[1]"
-              />
-
-              {/* Specular Top Glare */}
-              <div className="absolute top-0 inset-x-0 h-1/2 rounded-t-[22px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none z-[2]" />
+              {/* Specular Scanlines on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 scanline-overlay pointer-events-none z-[1]" />
 
               {/* Top Badge & Category */}
               <div className="relative z-10 flex items-center justify-between w-full">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 border border-white/15 backdrop-blur-md">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-black/90 border border-white/25">
                   <span
                     style={{
-                      backgroundColor: item.accent,
-                      boxShadow: `0 0 6px ${item.accent}`
+                      backgroundColor: item.accent
                     }}
-                    className="w-1.5 h-1.5 rounded-full animate-pulse"
+                    className="w-2 h-2 rounded-none animate-pulse"
                   />
-                  <span className="font-mono text-[10px] font-bold text-white/85">
+                  <span className="font-mono text-[11px] font-black text-white">
                     {item.monogram}
                   </span>
                 </div>
 
-                <span className="font-mono text-[9px] font-bold tracking-wider text-[#67e8f9] uppercase bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                <span className="font-mono text-[10px] font-bold tracking-wider text-[#00f0ff] uppercase bg-black/80 px-2 py-0.5 border border-[#00f0ff]/30">
                   {item.category.split("·")[0]}
                 </span>
               </div>
@@ -680,27 +674,26 @@ export default function SkillsSection() {
               {/* Middle Title & Tagline */}
               <div className="relative z-10 flex flex-col gap-1.5 my-auto">
                 <h3
-                  className={`text-xl sm:text-2xl font-black tracking-tight text-white drop-shadow-md group-hover:text-white transition-colors leading-tight ${
-                    item.isSerif ? "font-serif" : "font-sans"
-                  }`}
+                  style={{ fontFamily: item.isSerif ? "serif" : "var(--font-syne), var(--font-display), sans-serif" }}
+                  className="text-xl sm:text-2xl font-black tracking-tight text-white drop-shadow-md group-hover:text-white transition-colors leading-tight uppercase"
                 >
                   {item.name}
                 </h3>
-                <p className="text-[11px] sm:text-xs text-white/60 group-hover:text-white/90 line-clamp-2 leading-relaxed transition-colors duration-300">
+                <p className="font-sans text-[11px] sm:text-xs text-white/70 group-hover:text-white/95 line-clamp-2 leading-relaxed transition-colors duration-200">
                   {item.tagline}
                 </p>
               </div>
 
               {/* Bottom "Read insight →" CTA */}
-              <div className="relative z-10 flex items-center justify-between pt-2.5 border-t border-white/10 group-hover:border-white/20 transition-colors">
-                <span className="font-mono text-[11px] font-bold text-white/80 group-hover:text-[#67e8f9] flex items-center gap-1.5 transition-all duration-300">
+              <div className="relative z-10 flex items-center justify-between pt-2.5 border-t border-white/15 group-hover:border-white/30 transition-colors">
+                <span className="font-mono text-[11px] font-black text-white/90 group-hover:text-[#00f0ff] flex items-center gap-1.5 transition-all duration-200 uppercase">
                   Read insight{" "}
-                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">
+                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1.5 font-bold">
                     →
                   </span>
                 </span>
 
-                <span className="font-mono text-[9px] text-white/40 group-hover:text-white/70 uppercase">
+                <span className="font-mono text-[9px] font-bold text-white/40 group-hover:text-white/80 uppercase">
                   Spec ↗
                 </span>
               </div>
@@ -710,49 +703,37 @@ export default function SkillsSection() {
       </div>
 
       {/* CONTINUOUS MOTION MARQUEE - TRACK 2 (MOVING RIGHT) */}
-      <div className="relative w-full max-w-[100vw] overflow-hidden py-2.5 z-10 [mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)] mt-1.5">
-        <div className="animate-marquee-right flex gap-4 sm:gap-5 px-3">
+      <div className="relative w-full max-w-[100vw] overflow-hidden py-3 z-10 [mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)] mt-2">
+        <div className="animate-marquee-right flex gap-4 sm:gap-6 px-3">
           {marqueeRow2.map((item, idx) => (
             <article
               key={`${item.id}-r2-${idx}`}
               onClick={() => setActiveStory(item)}
-              style={{
-                boxShadow: "0 20px 45px -12px rgba(0,0,0,0.85)"
-              }}
-              className="group relative w-[230px] sm:w-[255px] h-[255px] sm:h-[275px] rounded-[22px] bg-[rgba(10,8,22,0.85)] border border-white/12 overflow-hidden flex flex-col justify-between p-4.5 sm:p-5.5 cursor-pointer transition-all duration-400 hover:-translate-y-2 hover:border-white/35 flex-shrink-0 select-none will-change-transform"
+              className="group relative w-[240px] sm:w-[270px] h-[260px] sm:h-[285px] bg-[#0b0f24] border border-white/20 hover:border-[#e879f9] overflow-hidden flex flex-col justify-between p-5 cursor-pointer transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#e879f9] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] flex-shrink-0 select-none will-change-transform"
             >
               {/* Hover Backdrop Reveal */}
               <div
-                className={`absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-100 group-hover:scale-105 pointer-events-none ${item.bgClass}`}
+                className={`absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-100 group-hover:scale-105 pointer-events-none ${item.bgClass}`}
               />
 
-              {/* Iridescent Border Rim Overlay on Hover */}
-              <div
-                style={{
-                  boxShadow: `inset 0 0 0 1px ${item.accent}30, 0 0 25px ${item.glowColor}`
-                }}
-                className="absolute inset-0 rounded-[22px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[1]"
-              />
-
-              {/* Specular Top Glare */}
-              <div className="absolute top-0 inset-x-0 h-1/2 rounded-t-[22px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none z-[2]" />
+              {/* Specular Scanlines on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 scanline-overlay pointer-events-none z-[1]" />
 
               {/* Top Badge & Category */}
               <div className="relative z-10 flex items-center justify-between w-full">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 border border-white/15 backdrop-blur-md">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-black/90 border border-white/25">
                   <span
                     style={{
-                      backgroundColor: item.accent,
-                      boxShadow: `0 0 6px ${item.accent}`
+                      backgroundColor: item.accent
                     }}
-                    className="w-1.5 h-1.5 rounded-full animate-pulse"
+                    className="w-2 h-2 rounded-none animate-pulse"
                   />
-                  <span className="font-mono text-[10px] font-bold text-white/85">
+                  <span className="font-mono text-[11px] font-black text-white">
                     {item.monogram}
                   </span>
                 </div>
 
-                <span className="font-mono text-[9px] font-bold tracking-wider text-[#a7f3d0] uppercase bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                <span className="font-mono text-[9px] font-bold tracking-wider text-[#e879f9] uppercase bg-black/80 px-2 py-0.5 border border-[#e879f9]/30">
                   {item.category.split("·")[0]}
                 </span>
               </div>
@@ -760,27 +741,26 @@ export default function SkillsSection() {
               {/* Middle Title & Tagline */}
               <div className="relative z-10 flex flex-col gap-1.5 my-auto">
                 <h3
-                  className={`text-xl sm:text-2xl font-black tracking-tight text-white drop-shadow-md group-hover:text-white transition-colors leading-tight ${
-                    item.isSerif ? "font-serif" : "font-sans"
-                  }`}
+                  style={{ fontFamily: item.isSerif ? "serif" : "var(--font-syne), var(--font-display), sans-serif" }}
+                  className="text-xl sm:text-2xl font-black tracking-tight text-white drop-shadow-md group-hover:text-white transition-colors leading-tight uppercase"
                 >
                   {item.name}
                 </h3>
-                <p className="text-[11px] sm:text-xs text-white/60 group-hover:text-white/90 line-clamp-2 leading-relaxed transition-colors duration-300">
+                <p className="font-sans text-[11px] sm:text-xs text-white/70 group-hover:text-white/95 line-clamp-2 leading-relaxed transition-colors duration-200">
                   {item.tagline}
                 </p>
               </div>
 
               {/* Bottom "Read insight →" CTA */}
-              <div className="relative z-10 flex items-center justify-between pt-2.5 border-t border-white/10 group-hover:border-white/20 transition-colors">
-                <span className="font-mono text-[11px] font-bold text-white/80 group-hover:text-[#a7f3d0] flex items-center gap-1.5 transition-all duration-300">
+              <div className="relative z-10 flex items-center justify-between pt-2.5 border-t border-white/15 group-hover:border-white/30 transition-colors">
+                <span className="font-mono text-[11px] font-black text-white/90 group-hover:text-[#e879f9] flex items-center gap-1.5 transition-all duration-200 uppercase">
                   Read insight{" "}
-                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">
+                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1.5 font-bold">
                     →
                   </span>
                 </span>
 
-                <span className="font-mono text-[9px] text-white/40 group-hover:text-white/70 uppercase">
+                <span className="font-mono text-[9px] font-bold text-white/40 group-hover:text-white/80 uppercase">
                   Technical ↗
                 </span>
               </div>
@@ -789,66 +769,66 @@ export default function SkillsSection() {
         </div>
       </div>
 
-      {/* PAUSE / SPEED HINT */}
-      <div className="mt-6 text-center text-[11px] font-mono text-white/40 flex items-center gap-2 z-10">
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#67e8f9] animate-ping" />
+      {/* PAUSE / SPEED HINT - Neo-Brutalist Status Readout */}
+      <div className="mt-8 px-4 py-1.5 bg-[#080c1f]/90 border border-white/20 text-center text-[11px] font-mono text-white/70 flex items-center gap-2 z-10 shadow-[2px_2px_0px_0px_#00f0ff]">
+        <span className="inline-block w-2 h-2 bg-[#00f0ff] animate-ping" />
         <span>HOVER ANY CARD TO PAUSE MOTION & REVEAL BACKDROP</span>
       </div>
 
-
-      {/* DEEP-DIVE INSIGHTS / STORY MODAL (EXACT RECREATION OF REFERENCE2.MP4) */}
+      {/* DEEP-DIVE INSIGHTS / STORY MODAL - ARCHITECTURAL BROADSHEET DOSSIER */}
       {activeStory && (
         <div
           onClick={() => setActiveStory(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-in fade-in duration-150"
           role="dialog"
           aria-modal="true"
           aria-labelledby="story-modal-title"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#0a0818] border border-white/20 rounded-[28px] p-6 sm:p-10 shadow-[0_30px_100px_rgba(0,0,0,0.95)] flex flex-col gap-6 my-auto select-text scrollbar-thin scrollbar-thumb-purple-500/30"
+            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#080c1f] border-2 border-[#00f0ff] p-6 sm:p-10 shadow-[12px_12px_0px_0px_rgba(0,0,0,0.98),0_0_60px_rgba(0,240,255,0.25)] flex flex-col gap-6 my-auto select-text custom-scrollbar"
           >
             {/* Modal Close Button */}
             <button
               onClick={() => setActiveStory(null)}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-105 z-20"
+              className="absolute top-6 right-6 w-10 h-10 bg-[#111634] hover:bg-[#00f0ff] hover:text-black border-2 border-white/30 hover:border-black flex items-center justify-center text-white text-base font-black transition-all hover:rotate-90 z-20 shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] cursor-pointer"
               aria-label="Close Story Insights"
             >
               ✕
             </button>
 
             {/* Breadcrumb Header */}
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-white/50 tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-mono font-black text-white/50 tracking-wider">
               <span>{activeStory.story.breadcrumb}</span>
               <span className="text-white/25">/</span>
-              <span className="text-[#67e8f9]">{activeStory.name}</span>
+              <span className="text-[#00f0ff]">{activeStory.name}</span>
             </div>
 
             {/* Main Headline */}
             <h2
               id="story-modal-title"
-              className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight pr-10"
+              style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+              className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight pr-10 uppercase drop-shadow-md"
             >
               {activeStory.story.title}
             </h2>
 
             {/* High-Level Impact Summary */}
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-lg text-white/85 leading-relaxed max-w-3xl border-l-4 border-[#00f0ff] pl-4 bg-white/[0.02] py-2">
               {activeStory.story.desc}
             </p>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-1">
               {activeStory.story.metrics.map((metric, i) => (
                 <div
                   key={i}
-                  className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/12 backdrop-blur flex flex-col gap-1"
+                  className="p-4 bg-[#111634] border border-white/15 flex flex-col gap-1 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.4)]"
                 >
-                  <span className="font-mono text-[10px] text-white/50 uppercase tracking-wider">
+                  <span className="font-mono text-[10px] text-white/50 uppercase tracking-wider font-bold">
                     {metric.label}
                   </span>
-                  <span className="text-lg sm:text-xl font-black text-white bg-gradient-to-r from-white via-[#a7f3d0] to-[#67e8f9] bg-clip-text text-transparent">
+                  <span className="text-lg sm:text-xl font-mono font-black text-[#00f0ff]">
                     {metric.value}
                   </span>
                 </div>
@@ -856,9 +836,10 @@ export default function SkillsSection() {
             </div>
 
             {/* Deep-Dive Architectural Overview */}
-            <div className="flex flex-col gap-3 py-2 text-sm sm:text-base text-white/75 leading-relaxed border-t border-white/10 pt-4">
-              <h4 className="font-mono text-xs font-bold text-[#67e8f9] tracking-widest uppercase">
-                ENGINEERING EXECUTION & PATTERNS
+            <div className="flex flex-col gap-3 py-2 text-sm sm:text-base text-white/80 leading-relaxed border-t-2 border-white/10 pt-4">
+              <h4 className="font-mono text-xs font-black text-[#00f0ff] tracking-widest uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-none bg-[#00f0ff] animate-pulse" />
+                <span>ENGINEERING EXECUTION & PATTERNS</span>
               </h4>
               <p>{activeStory.story.overview}</p>
 
@@ -867,25 +848,28 @@ export default function SkillsSection() {
                 {activeStory.story.keyPoints.map((point, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-white/85 p-2.5 rounded-xl bg-white/[0.02] border border-white/10"
+                    className="flex items-start gap-2.5 text-xs sm:text-sm text-white/90 p-3 bg-[#111634] border border-white/15"
                   >
-                    <span className="text-[#a7f3d0] font-bold">✓</span>
+                    <span className="font-mono text-[#e879f9] font-black text-xs">[ § 0{idx + 1} ]</span>
                     <span>{point}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* High-Contrast Signature Banner (Exact Recreation From Reference2.mp4 Frames) */}
-            <div className="w-full bg-white text-black rounded-2xl p-6 sm:p-8 flex flex-col gap-3.5 shadow-2xl mt-1">
+            {/* High-Contrast Signature Broadsheet Banner */}
+            <div className="w-full bg-[#f5f5f7] text-black border-4 border-black p-6 sm:p-8 flex flex-col gap-3.5 shadow-[6px_6px_0px_0px_#00f0ff] mt-1">
               {/* Banner Eyebrow Header */}
-              <div className="flex items-center justify-between border-b border-black/10 pb-3 font-mono text-[11px] font-bold text-neutral-600">
+              <div className="flex items-center justify-between border-b-2 border-black/20 pb-3 font-mono text-[11px] font-black text-neutral-700 uppercase">
                 <span className="truncate">{activeStory.story.bannerEyebrow}</span>
-                <span className="hidden sm:inline text-neutral-400">Production Ready</span>
+                <span className="hidden sm:inline bg-black text-[#00f0ff] px-2 py-0.5">Production Ready</span>
               </div>
 
               {/* Banner Main Title */}
-              <h3 className="text-xl sm:text-3xl font-black tracking-tight leading-snug text-black">
+              <h3
+                style={{ fontFamily: "var(--font-syne), var(--font-display), sans-serif" }}
+                className="text-xl sm:text-3xl font-black tracking-tight leading-snug text-black uppercase"
+              >
                 {activeStory.story.bannerHeading}
               </h3>
 
@@ -894,7 +878,7 @@ export default function SkillsSection() {
                 {activeStory.story.bannerBadges.map((badge, bIdx) => (
                   <span
                     key={bIdx}
-                    className="font-mono text-[11px] font-bold px-3 py-1 rounded-full bg-neutral-100 border border-neutral-300 text-neutral-800"
+                    className="font-mono text-[11px] font-black px-3 py-1 bg-black text-white border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
                   >
                     {badge}
                   </span>
@@ -902,19 +886,19 @@ export default function SkillsSection() {
               </div>
 
               {/* Banner Body Explanation */}
-              <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed pt-1">
+              <p className="font-sans text-xs sm:text-sm text-neutral-800 leading-relaxed pt-1">
                 {activeStory.story.bannerBody}
               </p>
             </div>
 
             {/* Bottom Actions */}
-            <div className="flex items-center justify-between pt-2 border-t border-white/10 flex-wrap gap-2">
+            <div className="flex items-center justify-between pt-3 border-t-2 border-white/10 flex-wrap gap-3">
               <a
                 href="#projectsSection"
                 onClick={() => {
                   setActiveStory(null);
                 }}
-                className="font-mono text-xs font-bold text-black bg-gradient-to-r from-[#67e8f9] to-[#a7f3d0] hover:from-[#a7f3d0] hover:to-[#67e8f9] px-5 py-2.5 rounded-xl transition-all shadow-[0_0_20px_rgba(103,232,249,0.4)] flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95"
+                className="font-mono text-xs font-black uppercase text-black bg-[#00f0ff] hover:bg-[#e879f9] border-2 border-white px-6 py-3 shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[5px_5px_0px_0px_#e879f9] flex items-center gap-2 cursor-pointer hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all"
               >
                 <span>Explore Live Projects</span>
                 <span>→</span>
@@ -922,7 +906,7 @@ export default function SkillsSection() {
 
               <button
                 onClick={() => setActiveStory(null)}
-                className="font-mono text-xs font-semibold text-white/60 hover:text-white px-4 py-2 cursor-pointer transition-colors"
+                className="font-mono text-xs font-bold text-white/70 hover:text-white px-4 py-2 cursor-pointer transition-colors"
               >
                 Close insight [ESC]
               </button>
